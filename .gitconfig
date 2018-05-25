@@ -1,0 +1,58 @@
+[user]
+    name = Brett Lentz
+    email = blentz@redhat.com
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = true
+    pager = true
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+
+[core]
+    pager = less -FRSX
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+
+[alias]
+    add = add --all
+    br = branch -vv
+    ch = cherry-pick -x
+    ci = commit -v
+    co = checkout
+    diffc = diff --cached
+    diffstat = diff --stat
+    log1 = log --oneline
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lolt = log --graph --decorate --pretty=format:'%C(red)%h%Creset %C(bold blue)%an%Creset %C(blue)<%ae>%Creset %Cgreen(%cr)%Creset%C(yellow)%d%Creset%n%s%n' --abbrev-commit --date=relative
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    st = status
+    tag = tag -a
+    merge-to = "!f() { export tmp_branch=git branch | grep '* ' | tr -d '* '; git checkout $1 && git merge --no-ff $tmp_branch && git checkout $tmp_branch; unset tmp_branch; }; f"
+
+[branch]
+    autosetuprebase = always
+
+[merge]
+    tool = meld
+
+[receive]
+    denyDeleteCurrent = warn
+[push]
+	default = matching
