@@ -1,0 +1,68 @@
+{
+    "dividers": {
+        "left": {
+            "hard": "▌",
+            "soft": "│"
+        },
+        "right": {
+            "hard": "▐",
+            "soft": "│"
+        }
+    },
+    "spaces": 0,
+    "default_module": "powerline.segments.common",
+    "segments": {
+        "left": [
+            {
+                "function": "powerline.segments.shell.mode"
+            },
+            {
+                "function": "powerline.segments.common.env.user",
+                "priority": 30
+            },
+            {
+                "function": "powerline.segments.common.net.hostname",
+                "priority": 20
+            },
+            {
+                "function": "powerline.segments.shell.cwd",
+                "priority": 10
+            },
+            {
+                "function": "powerline.segments.common.vcs.branch",
+                "priority": 40
+            },
+            {
+                "function": "powerline.segments.common.vcs.stash",
+                "priority": 50
+            },
+            {
+                "function": "powerline.segments.shell.last_status",
+                "priority": 20
+            }
+        ]
+    },
+    "segment_data": {
+        "hostname": {
+            "args": {
+                "only_if_ssh": true,
+                "exclude_domain": true
+            }
+        },
+        "virtualenv": {
+            "before": "ⓔ "
+        },
+        "branch": {
+            "args": {
+                "status_colors": true
+            }
+        },
+        "cwd": {
+            "args": {
+                "use_path_separator": true,
+                "dir_limit_depth": 2,
+                "shorten_home": true
+            }
+        }
+    }
+}

@@ -1,32 +1,6 @@
 "don't be backwards compatible with silly vi options
 set nocompatible
 
-" fancy colorscheme
-:colorscheme southernlights
-
-" status line
-" see: https://hackernoon.com/the-last-statusline-for-vim-a613048959b2
-set laststatus=2
-set statusline=
-set statusline+=%2*\ %l
-set statusline+=\ %*
-set statusline+=%1*\ ‹‹
-set statusline+=%1*\ %f\ %*
-set statusline+=%1*\ ››
-set statusline+=%1*\ %m
-set statusline+=%3*\ %F
-set statusline+=%=
-set statusline+=%3*\ %{fugitive#statusline()}
-set statusline+=%3*\ ‹‹
-set statusline+=%3*\ %{strftime('%R',getftime(expand('%')))}
-set statusline+=%3*\ ::
-set statusline+=%3*\ %n
-set statusline+=%3*\ ››\ %*
-
-
-" show line and column numbers
-set ruler
-
 " * Search & Replace
 
 " make searches case-insensitive, unless they contain upper-case letters:
@@ -41,10 +15,23 @@ set gdefault
 
 " * User Interface
 
+" fancy colorscheme
+:colorscheme southernlights
+
+" show line and column numbers
+set ruler
+
+" always show status line
+set laststatus=2
+
 " have syntax highlighting in terminals which can display colours:
 if has('syntax') && (&t_Co > 2)
   syntax on
 endif
+
+" remember gvim's size and position.
+" from: http://vim.wikia.com/wiki/Restore_screen_size_and_position
+source $HOME/.vim/gui_position.vim
 
 " have fifty lines of command-line (etc) history:
 set history=50
@@ -65,6 +52,10 @@ set showcmd
 set nomodeline
 
 " * Text Formatting -- Specific File Formats
+
+" enable filetype detection:
+filetype on
+filetype plugin indent on
 
 " for C-like programming, have automatic indentation:
 autocmd FileType c,cpp,slang set cindent
@@ -92,6 +83,32 @@ autocmd FileType html,css set noexpandtab tabstop=2
 " needed, and have indentation at 8 chars to be sure that all indents are tabs
 " (despite the mappings later):
 autocmd FileType make set noexpandtab shiftwidth=8
+
+" python
+autocmd FileType python let python_highlight_all=1
+autocmd FileType python set foldmethod=indent
+autocmd FileType python set shiftwidth=4
+autocmd FileType python set expandtab
+
+" ruby
+autocmd FileType ruby set foldmethod=indent
+autocmd FileType ruby set shiftwidth=2
+
+" C
+autocmd FileType C set expandtab
+autocmd FileType C set foldmethod=indent
+
+" C++
+autocmd FileType C++ set expandtab
+autocmd FileType C++ set foldmethod=indent
+
+" Puppet
+au BufRead,BufNewFile *.pp set shiftwidth=2
+
+" YAML
+autocmd FileType yaml set foldmethod=indent
+au BufRead,BufNewFile *.yml set shiftwidth=2
+au BufRead,BufNewFile *.yaml set shiftwidth=2
 
 " * Keystrokes -- Moving Around
 
@@ -121,10 +138,9 @@ inoremap <S-Tab> <C-D>
 "this rule really applys to everything.
 highlight RedundantSpaces term=standout ctermbg=red guibg=red
 match RedundantSpaces /\s\+$\| \+\ze\t/ "\ze sets end of match so only spaces highlighted
+
 "use :set list! to toggle visible whitespace on/off
 set listchars=tab:>-,trail:.,extends:>
-
-filetype plugin indent on
 
 " sane defaults
 set shiftwidth=4
@@ -135,33 +151,16 @@ set expandtab
 set textwidth=79
 set encoding=utf-8
 
-" python
-autocmd FileType python let python_highlight_all=1
-autocmd FileType python set foldmethod=indent
-autocmd FileType python set shiftwidth=4
-autocmd FileType python set expandtab
+" * Plugin Configs
 
-" ruby
-autocmd FileType ruby set foldmethod=indent
-autocmd FileType ruby set shiftwidth=2
-
-" C
-autocmd FileType C set expandtab
-autocmd FileType C set foldmethod=indent
-
-" C++
-autocmd FileType C++ set expandtab
-autocmd FileType C++ set foldmethod=indent
-
-" Puppet
-au BufRead,BufNewFile *.pp set shiftwidth=2
-
-" YAML
-autocmd FileType ruby set foldmethod=indent
-au BufRead,BufNewFile *.yml set shiftwidth=2
-au BufRead,BufNewFile *.yaml set shiftwidth=2
-
-au! Syntax tjp          so ~/.vim/syntax/tjp.vim
+" added the sys.path.append so that powerline import works in virtualenv
+" the three powerline import lines do not work in virtualenv otherwise
+if has('python')
+    python import sys; sys.path.append("/usr/lib/python3.6/site-packages/")
+    python from powerline.vim import setup as powerline_setup
+    python powerline_setup()
+    python del powerline_setup
+endif
 
 " tabbar options, don't run in vimdiff'
 if &diff
@@ -185,22 +184,21 @@ let g:syntastic_enable_signs        = 1
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_python_checkers = ['flake8']
 
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_autoclose_preview_window_after_completion = 1
-
 " See: http://upload.wikimedia.org/wikipedia/en/1/15/Xterm_256color_chart.svg
 highlight SyntasticWarning guibg=yellow guifg=black ctermfg=016 ctermbg=226
 highlight SyntasticError   guibg=red guifg=white ctermfg=255 ctermbg=160
 
+" YouCompleteMe options
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+let g:ycm_autoclose_preview_window_after_completion = 1
+
 " NERDTree
 nmap <F7> :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
-
-" enable filetype detection:
-filetype off
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -218,6 +216,3 @@ if exists(':Plugin')
 endif
 " All of your Plugins must be added before the following line
 call vundle#end()
-
-filetype plugin indent on
-

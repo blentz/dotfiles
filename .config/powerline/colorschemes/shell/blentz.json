@@ -1,0 +1,39 @@
+{
+	"name": "Default color scheme for shell prompts",
+	"groups": {
+		"attached_clients":          { "fg": "white", "bg": "darkestgreen", "attrs": [] },
+                "background":                { "fg": "white", "bg": "gray0", "attrs": [] },
+                "background:divider":        { "fg": "brightgreen", "bg": "black", "attrs": [] },
+                "blank":                     { "fg": "black", "bg": "black", "attrs": [] },
+                "branch":                    { "fg": "gray9", "bg": "gray2", "attrs": [] },
+                "branch_clean":              { "fg": "mediumgreen", "bg": "gray2", "attrs": [] },
+                "branch_dirty":              { "fg": "brightyellow", "bg": "gray2", "attrs": [] },
+                "branch:divider":            { "fg": "gray7", "bg": "gray2", "attrs": [] },
+                "critical:failure":          { "fg": "white", "bg": "darkestred", "attrs": [] },
+                "critical:success":          { "fg": "white", "bg": "darkestgreen", "attrs": [] },
+                "cwd":                       "information:additional",
+                "cwd:current_folder":        "information:regular",
+                "cwd:divider":               { "fg": "gray7", "bg": "gray2", "attrs": [] },
+		"environment":               { "fg": "white", "bg": "darkestgreen", "attrs": [] },
+		"hostname":                  { "fg": "brightyellow", "bg": "mediumorange", "attrs": [] },
+                "information:additional":    { "fg": "gray6", "bg": "gray2", "attrs": [] },
+                "information:regular":       { "fg": "gray8", "bg": "gray2", "attrs": ["bold"] },
+                "information:highlighted":   { "fg": "white", "bg": "gray4", "attrs": [] },
+                "information:priority":      { "fg": "brightyellow", "bg": "mediumorange", "attrs": [] },
+		"mode":                      { "fg": "darkestgreen", "bg": "brightgreen", "attrs": ["bold"] },
+                "promptline":                { "fg": "white", "bg": "darkestblue", "attrs": ["bold"] },
+                "session":                   { "fg": "black", "bg": "gray2", "attrs": ["bold"] },
+                "stash":                     "branch_dirty",
+                "stash:divider":             "branch:divider",
+		"user":                      { "fg": "gray8", "bg": "darkestred", "attrs": [] },
+                "virtualenv":                { "fg": "white", "bg": "darkcyan", "attrs": [] },
+                "warning:regular":           { "fg": "white", "bg": "brightred", "attrs": ["bold"] }
+	},
+	"mode_translations": {
+		"vicmd": {
+			"groups": {
+				"mode": {"fg": "darkestcyan", "bg": "white", "attrs": ["bold"]}
+			}
+		}
+	}
+}
