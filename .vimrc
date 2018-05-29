@@ -213,6 +213,7 @@ if exists(':Plugin')
     Plugin 'Xuyuanp/nerdtree-git-plugin'
     Plugin 'flazz/vim-colorschemes'
     Plugin 'majutsushi/tagbar'
+    Plugin 'jiangmiao/auto-pairs'
 endif
 " All of your Plugins must be added before the following line
 call vundle#end()
