@@ -26,7 +26,7 @@
                 "stash":                     "branch_dirty",
                 "stash:divider":             "branch:divider",
 		"user":                      { "fg": "gray8", "bg": "darkestred", "attrs": [] },
-                "virtualenv":                { "fg": "white", "bg": "darkcyan", "attrs": [] },
+                "virtualenv":                { "fg": "mediumorange", "bg": "gray2", "attrs": [] },
                 "warning:regular":           { "fg": "white", "bg": "brightred", "attrs": ["bold"] }
 	},
 	"mode_translations": {
