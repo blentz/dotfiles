@@ -44,7 +44,7 @@ alias git="${HOME}/bin/hub"
 alias yum='/usr/bin/dnf'
 alias mutt='/usr/bin/neomutt'
 
-alias docker-rmi-untagged='docker rmi $(docker images | grep "^<none>" | awk '"'"'{print $3}'"'"')'
+alias docker-rmi-untagged='docker rmi $(docker images -q -f "dangling=true")'
 alias docker-rm-exited='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
 
 function rpmspec-download-upstream() {
