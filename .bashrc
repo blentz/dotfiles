@@ -6,10 +6,11 @@ function source_file() {
     fi
 }
 
-source_file '/etc/bashrc'
-source_file '/etc/bash_completion'
-source_file '/etc/java/java.conf'
-source_file ${HOME}/bin/oc_completion.sh
+source_file "/etc/bashrc"
+source_file "/etc/bash_completion"
+source_file "/etc/java/java.conf"
+source_file "${HOME}/bin/oc_completion.sh"
+source_file "${HOME}/.minishift_token"
 
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
@@ -37,7 +38,6 @@ export GOPATH=$HOME/.go
 export PATH="$PATH:~/bin:$GOPATH:$GOPATH/bin"
 
 export PIPENV_PYPI_MIRROR='http://devpi-devpi.192.168.42.41.nip.io/root/pypi/+simple/'
-export MINISHIFT_GITHUB_API_TOKEN='4a74b2394ed0ec1cffc891c4e1bd95b25404cfa8'
 
 alias gpa='CURR=`git branch | grep "\*" | tr -d "*"`; git fetch; for x in $(git branch -vv | grep origin | tr -d "*" | awk '\''{print $1}'\''); do git checkout $x && git rebase origin/${x}; done; git checkout ${CURR}'
 
