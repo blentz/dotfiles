@@ -155,11 +155,11 @@ set encoding=utf-8
 
 " added the sys.path.append so that powerline import works in virtualenv
 " the three powerline import lines do not work in virtualenv otherwise
-if has('python')
-    python import sys; sys.path.append("/usr/lib/python3.6/site-packages/")
-    python from powerline.vim import setup as powerline_setup
-    python powerline_setup()
-    python del powerline_setup
+if has('python3')
+    python3 import sys; sys.path.append("/usr/lib/python3.7/site-packages/")
+    python3 from powerline.vim import setup as powerline_setup
+    python3 powerline_setup()
+    python3 del powerline_setup
 endif
 
 " tabbar options, don't run in vimdiff'
@@ -198,8 +198,21 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 nmap <F7> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
+" autoopen NerdTree when no file is specified
+autocmd vimenter * if !argc() | NERDTree | endif
+
 " Tagbar
 nmap <F8> :TagbarToggle<CR>
+
+" open tagbar when opening Vim with a supported file/files
+autocmd VimEnter * nested :call tagbar#autoopen(1)
+
+" open Tagbar when opening a supported file in an already running Vim
+autocmd BufEnter * nested :call tagbar#autoopen(0)
+
+" With multiple tabs, open Tagbar in the current tab when
+" you switch to an already loaded, supported buffer
+autocmd FileType * nested :call tagbar#autoopen(0)
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim

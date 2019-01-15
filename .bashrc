@@ -36,6 +36,9 @@ PROMPT_COMMAND="$PROMPT_COMMAND; prompt_command"
 export GOPATH=$HOME/.go
 export PATH="$PATH:~/bin:$GOPATH:$GOPATH/bin"
 
+export PIPENV_PYPI_MIRROR='http://devpi-devpi.192.168.42.41.nip.io/root/pypi/+simple/'
+export MINISHIFT_GITHUB_API_TOKEN='4a74b2394ed0ec1cffc891c4e1bd95b25404cfa8'
+
 alias gpa='CURR=`git branch | grep "\*" | tr -d "*"`; git fetch; for x in $(git branch -vv | grep origin | tr -d "*" | awk '\''{print $1}'\''); do git checkout $x && git rebase origin/${x}; done; git checkout ${CURR}'
 
 alias rmorig='find . -name "*.orig" -delete'
@@ -66,3 +69,4 @@ function rebaseupstream () {
   git push origin --tags
   git checkout ${startbranch}
 }
+
