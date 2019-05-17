@@ -37,7 +37,7 @@ PROMPT_COMMAND="$PROMPT_COMMAND; prompt_command"
 export GOPATH=$HOME/.go
 export PATH="$PATH:~/bin:$GOPATH:$GOPATH/bin"
 
-export PIPENV_PYPI_MIRROR='http://devpi-devpi.192.168.42.41.nip.io/root/pypi/+simple/'
+export PIPENV_PYPI_MIRROR='http://devpi-devpi.192.168.42.57.nip.io/root/pypi/+simple/'
 
 alias gpa='CURR=`git branch | grep "\*" | tr -d "*"`; git fetch; for x in $(git branch -vv | grep origin | tr -d "*" | awk '\''{print $1}'\''); do git checkout $x && git rebase origin/${x}; done; git checkout ${CURR}'
 

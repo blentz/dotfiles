@@ -18,11 +18,21 @@ set gdefault
 " fancy colorscheme
 :colorscheme southernlights
 
+if has('gui_running')
+    set guifont=Inconsolata-g\ for\ Powerline\ Medium\ 10
+endif
+
 " show line and column numbers
 set ruler
 
 " always show status line
 set laststatus=2
+
+" Always display the tabline, even if there is only one tab
+set showtabline=2
+
+" we are always using a color terminal. this isn't the 1980s...
+set t_Co=256
 
 " have syntax highlighting in terminals which can display colours:
 if has('syntax') && (&t_Co > 2)
@@ -41,9 +51,9 @@ set history=50
 " have further <Tab>s cycle through the possibilities:
 set wildmode=list:longest,full
 
-" display the current mode and partially-typed commands in the status line:
-set showmode
-set showcmd
+" don't display the current mode and partially-typed commands in the status line:
+set noshowmode
+set noshowcmd
 
 " have the mouse enabled all the time:
 "set mouse=a
@@ -182,7 +192,9 @@ let g:syntastic_loc_list_height=3
 let g:syntastic_echo_current_error  = 1
 let g:syntastic_enable_signs        = 1
 let g:syntastic_enable_highlighting = 1
-let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_checkers = ['pylint', 'flake8']
+let g:syntastic_python_python_exec = '/usr/bin/env python3'
+let g:syntastic_python_pylint_exec = '/usr/bin/env pylint'
 
 " See: http://upload.wikimedia.org/wikipedia/en/1/15/Xterm_256color_chart.svg
 highlight SyntasticWarning guibg=yellow guifg=black ctermfg=016 ctermbg=226
@@ -197,6 +209,9 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 " NERDTree
 nmap <F7> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
+
+" ignore certain files
+let NERDTreeIgnore = ['__pycache__']
 
 " autoopen NerdTree when no file is specified
 autocmd vimenter * if !argc() | NERDTree | endif
