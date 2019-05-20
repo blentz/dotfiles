@@ -194,7 +194,6 @@ let g:syntastic_enable_signs        = 1
 let g:syntastic_enable_highlighting = 1
 let g:syntastic_python_checkers = ['pylint', 'flake8']
 let g:syntastic_python_python_exec = '/usr/bin/env python3'
-let g:syntastic_python_pylint_exec = '/usr/bin/env pylint'
 
 " See: http://upload.wikimedia.org/wikipedia/en/1/15/Xterm_256color_chart.svg
 highlight SyntasticWarning guibg=yellow guifg=black ctermfg=016 ctermbg=226
@@ -211,7 +210,7 @@ nmap <F7> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
 " ignore certain files
-let NERDTreeIgnore = ['__pycache__']
+let NERDTreeIgnore = ['__pycache__', '\.sw[po]$']
 
 " autoopen NerdTree when no file is specified
 autocmd vimenter * if !argc() | NERDTree | endif
