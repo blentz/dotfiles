@@ -192,7 +192,7 @@ let g:syntastic_loc_list_height=3
 let g:syntastic_echo_current_error  = 1
 let g:syntastic_enable_signs        = 1
 let g:syntastic_enable_highlighting = 1
-let g:syntastic_python_checkers = ['pylint', 'flake8']
+let g:syntastic_python_checkers = ['pylint', 'flake8', 'pyflakes', 'pycodestyle']
 let g:syntastic_python_python_exec = '/usr/bin/env python3'
 
 " See: http://upload.wikimedia.org/wikipedia/en/1/15/Xterm_256color_chart.svg
@@ -219,7 +219,7 @@ autocmd vimenter * if !argc() | NERDTree | endif
 nmap <F8> :TagbarToggle<CR>
 
 " open tagbar when opening Vim with a supported file/files
-autocmd VimEnter * nested :call tagbar#autoopen(1)
+autocmd FileType * call tagbar#autoopen(0)
 
 " open Tagbar when opening a supported file in an already running Vim
 autocmd BufEnter * nested :call tagbar#autoopen(0)
