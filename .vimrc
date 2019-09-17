@@ -228,6 +228,40 @@ autocmd BufEnter * nested :call tagbar#autoopen(0)
 " you switch to an already loaded, supported buffer
 autocmd FileType * nested :call tagbar#autoopen(0)
 
+" AsciiDoctor
+
+" What to use for HTML, default `asciidoctor`.
+let g:asciidoctor_executable = 'asciidoctor'
+
+" What extensions to use for HTML, default `[]`.
+let g:asciidoctor_extensions = ['asciidoctor-diagram', 'asciidoctor-rouge']
+
+" Fold sections, default `0`.
+let g:asciidoctor_folding = 1
+
+" Fold options, default `0`.
+let g:asciidoctor_fold_options = 1
+
+" List of filetypes to highlight, default `[]`
+let g:asciidoctor_fenced_languages = ['python', 'c', 'javascript']
+
+" Function to create buffer local mappings
+fun! AsciidoctorMappings()
+	nnoremap <buffer> <leader>oo :AsciidoctorOpenRAW<CR>
+	nnoremap <buffer> <leader>op :AsciidoctorOpenPDF<CR>
+	nnoremap <buffer> <leader>oh :AsciidoctorOpenHTML<CR>
+	nnoremap <buffer> <leader>ox :AsciidoctorOpenDOCX<CR>
+	nnoremap <buffer> <leader>ch :Asciidoctor2HTML<CR>
+	nnoremap <buffer> <leader>cp :Asciidoctor2PDF<CR>
+	nnoremap <buffer> <leader>cx :Asciidoctor2DOCX<CR>
+endfun
+
+" Call AsciidoctorMappings for all `*.adoc` and `*.asciidoc` files
+augroup asciidoctor
+	au!
+	au BufEnter *.adoc,*.asciidoc call AsciidoctorMappings()
+augroup END
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -242,6 +276,7 @@ if exists(':Plugin')
     Plugin 'flazz/vim-colorschemes'
     Plugin 'majutsushi/tagbar'
     Plugin 'jiangmiao/auto-pairs'
+    Plugin 'habamax/vim-asciidoctor'
 endif
 " All of your Plugins must be added before the following line
 call vundle#end()
