@@ -228,6 +228,20 @@ autocmd BufEnter * nested :call tagbar#autoopen(0)
 " you switch to an already loaded, supported buffer
 autocmd FileType * nested :call tagbar#autoopen(0)
 
+" Black
+"
+" run Black formatter on save
+" autocmd BufWritePre *.py execute ':Black'
+
+" F12 to run Black
+nnoremap <F12> :Black<CR>
+
+" max line-length to use before wrapping
+let g:black_linelength = 100
+
+" whether Black should normalize string quoting
+let g:black_skip_string_normalization = 1
+
 " AsciiDoctor
 
 " What to use for HTML, default `asciidoctor`.
@@ -277,6 +291,7 @@ if exists(':Plugin')
     Plugin 'majutsushi/tagbar'
     Plugin 'jiangmiao/auto-pairs'
     Plugin 'habamax/vim-asciidoctor'
+    Plugin 'psf/black'
 endif
 " All of your Plugins must be added before the following line
 call vundle#end()

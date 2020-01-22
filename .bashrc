@@ -32,12 +32,14 @@ function prompt_command {
         LAST_HISTORY_WRITE=$SECONDS
     fi
 }
-PROMPT_COMMAND="$PROMPT_COMMAND; prompt_command"
+PROMPT_COMMAND="${PROMPT_COMMAND}; prompt_command"
 
 export GOPATH=$HOME/.go
-export PATH="$PATH:~/bin:$GOPATH:$GOPATH/bin"
+export PATH="$PATH:$HOME/bin:$GOPATH:$GOPATH/bin"
 
-export PIPENV_PYPI_MIRROR="http://devpi-devpi.$(minishift ip).nip.io/root/pypi/+simple/"
+# export PIPENV_PYPI_MIRROR="http://devpi-devpi.$(minishift ip).nip.io/root/pypi/+simple/"
+export PIP_TRUSTED_HOST='devpi-devpi.apps-crc.testing'
+export PIPENV_PYPI_MIRROR="http://${PIP_TRUSTED_HOST}/root/pypi/+simple/"
 
 alias gpa='CURR=`git branch | grep "\*" | tr -d "*"`; git fetch; for x in $(git branch -vv | grep origin | tr -d "*" | awk '\''{print $1}'\''); do git checkout $x && git rebase origin/${x}; done; git checkout ${CURR}'
 
@@ -49,6 +51,8 @@ alias mutt='/usr/bin/neomutt'
 
 alias docker-rmi-untagged='docker rmi $(docker images -q -f "dangling=true")'
 alias docker-rm-exited='docker rm $(docker ps -qa --no-trunc --filter "status=exited")'
+alias podman-rmi-untagged='podman rmi $(podman images -q -f "dangling=true")'
+alias podman-rm-exited='podman rm $(podman ps -qa --no-trunc --filter "status=exited")'
 
 function rpmspec-download-upstream() {
     spectool -g -S $1
