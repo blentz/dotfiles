@@ -158,7 +158,7 @@ set smartindent
 set autoindent
 set tabstop=8
 set expandtab
-set textwidth=79
+set textwidth=119
 set encoding=utf-8
 
 " * Plugin Configs
@@ -166,7 +166,7 @@ set encoding=utf-8
 " added the sys.path.append so that powerline import works in virtualenv
 " the three powerline import lines do not work in virtualenv otherwise
 if has('python3')
-    python3 import sys; sys.path.append("/usr/lib/python3.7/site-packages/")
+    python3 import sys; sys.path.append("/usr/lib/python3.8/site-packages/")
     python3 from powerline.vim import setup as powerline_setup
     python3 powerline_setup()
     python3 del powerline_setup
@@ -192,7 +192,7 @@ let g:syntastic_loc_list_height=3
 let g:syntastic_echo_current_error  = 1
 let g:syntastic_enable_signs        = 1
 let g:syntastic_enable_highlighting = 1
-let g:syntastic_python_checkers = ['pylint', 'flake8', 'pyflakes', 'pycodestyle']
+let g:syntastic_python_checkers = ['flake8', 'pylint']
 let g:syntastic_python_python_exec = '/usr/bin/env python3'
 
 " See: http://upload.wikimedia.org/wikipedia/en/1/15/Xterm_256color_chart.svg
@@ -237,10 +237,12 @@ autocmd FileType * nested :call tagbar#autoopen(0)
 nnoremap <F12> :Black<CR>
 
 " max line-length to use before wrapping
-let g:black_linelength = 100
+let g:black_linelength = 119
+
+let g:black_virtualenv="~/.vim/black"
 
 " whether Black should normalize string quoting
-let g:black_skip_string_normalization = 1
+" let g:black_skip_string_normalization = 1
 
 " AsciiDoctor
 
@@ -291,7 +293,8 @@ if exists(':Plugin')
     Plugin 'majutsushi/tagbar'
     Plugin 'jiangmiao/auto-pairs'
     Plugin 'habamax/vim-asciidoctor'
-    Plugin 'psf/black'
+    Plugin 'psf/black', { 'branch': 'stable' }
+    Bundle 'Rykka/riv.vim'
 endif
 " All of your Plugins must be added before the following line
 call vundle#end()
