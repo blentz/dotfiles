@@ -18,9 +18,9 @@ set gdefault
 " fancy colorscheme
 :colorscheme southernlights
 
-if has('gui_running')
-    set guifont=Inconsolata-g\ for\ Powerline\ Medium\ 10
-endif
+" if has('gui_running')
+"     set guifont=Whatever Patched Font
+" endif
 
 " show line and column numbers
 set ruler
@@ -278,6 +278,9 @@ augroup asciidoctor
 	au BufEnter *.adoc,*.asciidoc call AsciidoctorMappings()
 augroup END
 
+" jinja templates
+autocmd BufNewFile,BufRead *.j2 set syntax=jinja
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -295,6 +298,8 @@ if exists(':Plugin')
     Plugin 'habamax/vim-asciidoctor'
     Plugin 'psf/black', { 'branch': 'stable' }
     Bundle 'Rykka/riv.vim'
+    Plugin 'powerline/powerline-fonts'
+    Plugin 'https://github.com/Glench/Vim-Jinja2-Syntax.git'
 endif
 " All of your Plugins must be added before the following line
 call vundle#end()
