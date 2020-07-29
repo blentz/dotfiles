@@ -16,7 +16,11 @@ set gdefault
 " * User Interface
 
 " fancy colorscheme
-:colorscheme southernlights
+if has('gui_running')
+    :colorscheme darkdevel
+else
+    :colorscheme southernlights
+endif
 
 " if has('gui_running')
 "     set guifont=Whatever Patched Font
