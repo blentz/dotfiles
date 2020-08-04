@@ -35,7 +35,6 @@ PROMPT_COMMAND="${PROMPT_COMMAND} save_history"
 export GOPATH=$HOME/.go
 export PATH="$PATH:$HOME/bin:$GOPATH:$GOPATH/bin"
 
-# export PIPENV_PYPI_MIRROR="http://devpi-devpi.$(minishift ip).nip.io/root/pypi/+simple/"
 export PIP_TRUSTED_HOST='localhost'
 export PIPENV_PYPI_MIRROR="http://${PIP_TRUSTED_HOST}:3141/root/pypi/+simple/"
 
@@ -50,6 +49,8 @@ alias docker-rmi-untagged='docker rmi $(docker images -q -f "dangling=true")'
 alias docker-rm-exited='docker rm -v $(docker ps -qa --no-trunc --filter "status=exited")'
 alias podman-rmi-untagged='podman rmi $(podman images -q -f "dangling=true")'
 alias podman-rm-exited='podman rm -v $(podman ps -qa --no-trunc --filter "status=exited")'
+
+alias devpi-run='podman run -d --name devpi --publish 3141:3141 --volume /home/blentz/.devpi:/data:Z --env=DEVPI_PASSWORD=redhat --restart always muccg/devpi'
 
 function rpmspec-download-upstream() {
     spectool -g -S $1
