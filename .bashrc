@@ -13,6 +13,7 @@ powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
 source_file '/usr/share/powerline/bash/powerline.sh'
+# eval "$(starship init bash)"
 
 source_file "/etc/java/java.conf"
 if [ ! -z "${JAVA_HOME}" ]; then
@@ -50,7 +51,18 @@ alias docker-rm-exited='docker rm -v $(docker ps -qa --no-trunc --filter "status
 alias podman-rmi-untagged='podman rmi $(podman images -q -f "dangling=true")'
 alias podman-rm-exited='podman rm -v $(podman ps -qa --no-trunc --filter "status=exited")'
 
-alias devpi-run='podman run -d --name devpi --publish 3141:3141 --volume /home/blentz/.devpi:/data:Z --env=DEVPI_PASSWORD=redhat --restart always muccg/devpi'
+alias devpi-run='podman run -d --name devpi --publish 3141:3141 \
+                            --volume /home/blentz/.devpi:/data:Z \
+                            --env=DEVPI_PASSWORD=redhat \
+                            --restart always \
+                            muccg/devpi || podman start devpi'
+
+alias app-interface-run='podman run -d --name qontract-server --restart always --publish 4000:4000 \
+                                    -e APP_INTERFACE_PATH=/app-interface \
+                                    -v /home/blentz/git/app-interface:/app-interface:Z \
+                                    -e LOAD_METHOD=fs \
+                                    -e DATAFILES_FILE=/app-interface/data.json \
+                                    qontract-server || podman start qontract-server'
 
 function rpmspec-download-upstream() {
     spectool -g -S $1
@@ -73,5 +85,5 @@ function rebaseupstream () {
 }
 
 function update-env() {
-    source $1 && export $(cut -d= -f1 $1)
+    source $1 && export $(grep "^[^#;]" $1 | cut -d= -f1)
 }

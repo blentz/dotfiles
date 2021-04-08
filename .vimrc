@@ -124,6 +124,11 @@ autocmd FileType yaml set foldmethod=indent
 au BufRead,BufNewFile *.yml set shiftwidth=2
 au BufRead,BufNewFile *.yaml set shiftwidth=2
 
+" JSON
+autocmd FileType json set foldmethod=syntax
+au BufRead,BufNewFile *.json set shiftwidth=2
+au BufRead,BufNewFile *.json set shiftwidth=2
+
 " * Keystrokes -- Moving Around
 
 " have the h and l cursor keys wrap between lines (like <Space> and <BkSpc> do
@@ -170,7 +175,7 @@ set encoding=utf-8
 " added the sys.path.append so that powerline import works in virtualenv
 " the three powerline import lines do not work in virtualenv otherwise
 if has('python3')
-    python3 import sys; sys.path.append("/usr/lib/python3.8/site-packages/")
+    python3 import sys; sys.path.append("/usr/lib/python3.9/site-packages/")
     python3 from powerline.vim import setup as powerline_setup
     python3 powerline_setup()
     python3 del powerline_setup
