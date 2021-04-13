@@ -32,7 +32,7 @@ export HISTSIZE=16384
 export HISTFILESIZE=16384
 LAST_HISTORY_WRITE=$SECONDS
 function save_history {
-    if [ $(($SECONDS - $LAST_HISTORY_WRITE)) > 60 ]; then
+    if [[ $(($SECONDS - $LAST_HISTORY_WRITE)) > 60 ]]; then
         history -a && history -c && history -r
         LAST_HISTORY_WRITE=$SECONDS
     fi
