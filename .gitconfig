@@ -1,6 +1,7 @@
 [user]
     name = Brett Lentz
-    email = blentz@redhat.com
+    email = brett.lentz@tamr.com
+    signingkey = AF2ABEE8
 
 [color]
     diff = auto
@@ -51,18 +52,20 @@
     autosetuprebase = always
 
 [merge]
-	tool = /usr/bin/meld
+    tool = /usr/bin/meld
 
 [receive]
     denyDeleteCurrent = warn
 [push]
-	default = matching
+    default = matching
 [http]
-	sslVerify = false
+    sslVerify = false
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 [fetch]
-	prune = true
+    prune = true
+[commit]
+    gpgsign = true

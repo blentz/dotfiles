@@ -65,70 +65,6 @@ set noshowcmd
 " don't have files trying to override this .vimrc:
 set nomodeline
 
-" * Text Formatting -- Specific File Formats
-
-" enable filetype detection:
-filetype on
-filetype plugin indent on
-
-" for C-like programming, have automatic indentation:
-autocmd FileType c,cpp,slang set cindent
-
-" for actual C (not C++) programming where comments have explicit end
-" characters, if starting a new line in the middle of a comment automatically
-" insert the comment leader characters:
-autocmd FileType c set formatoptions+=ro
-
-" for Perl programming, have things in braces indenting themselves:
-autocmd FileType perl set smartindent
-
-" for CSS, also have things in braces indented:
-autocmd FileType css set smartindent
-
-" for HTML, generally format text, but if a long line has been created leave it
-" alone when editing:
-autocmd FileType html set formatoptions+=tl
-
-" for both CSS and HTML, use genuine tab characters for indentation, to make
-" files a few bytes smaller:
-autocmd FileType html,css set noexpandtab tabstop=2
-
-" in makefiles, don't expand tabs to spaces, since actual tab characters are
-" needed, and have indentation at 8 chars to be sure that all indents are tabs
-" (despite the mappings later):
-autocmd FileType make set noexpandtab shiftwidth=8
-
-" python
-autocmd FileType python let python_highlight_all=1
-autocmd FileType python set foldmethod=indent
-autocmd FileType python set shiftwidth=4
-autocmd FileType python set expandtab
-
-" ruby
-autocmd FileType ruby set foldmethod=indent
-autocmd FileType ruby set shiftwidth=2
-
-" C
-autocmd FileType C set expandtab
-autocmd FileType C set foldmethod=indent
-
-" C++
-autocmd FileType C++ set expandtab
-autocmd FileType C++ set foldmethod=indent
-
-" Puppet
-au BufRead,BufNewFile *.pp set shiftwidth=2
-
-" YAML
-autocmd FileType yaml set foldmethod=indent
-au BufRead,BufNewFile *.yml set shiftwidth=2
-au BufRead,BufNewFile *.yaml set shiftwidth=2
-
-" JSON
-autocmd FileType json set foldmethod=syntax
-au BufRead,BufNewFile *.json set shiftwidth=2
-au BufRead,BufNewFile *.json set shiftwidth=2
-
 " * Keystrokes -- Moving Around
 
 " have the h and l cursor keys wrap between lines (like <Space> and <BkSpc> do
@@ -291,6 +227,7 @@ augroup END
 autocmd BufNewFile,BufRead *.j2 set syntax=jinja
 
 " set the runtime path to include Vundle and initialize
+filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 if exists(':Plugin')
@@ -312,3 +249,68 @@ if exists(':Plugin')
 endif
 " All of your Plugins must be added before the following line
 call vundle#end()
+
+" * Text Formatting -- Specific File Formats
+
+" enable filetype detection:
+filetype on
+filetype plugin indent on
+
+" for C-like programming, have automatic indentation:
+autocmd FileType c,cpp,slang set cindent
+
+" for actual C (not C++) programming where comments have explicit end
+" characters, if starting a new line in the middle of a comment automatically
+" insert the comment leader characters:
+autocmd FileType c set formatoptions+=ro
+
+" for Perl programming, have things in braces indenting themselves:
+autocmd FileType perl set smartindent
+
+" for CSS, also have things in braces indented:
+autocmd FileType css set smartindent
+
+" for HTML, generally format text, but if a long line has been created leave it
+" alone when editing:
+autocmd FileType html set formatoptions+=tl
+
+" for both CSS and HTML, use genuine tab characters for indentation, to make
+" files a few bytes smaller:
+autocmd FileType html,css set noexpandtab tabstop=2
+
+" in makefiles, don't expand tabs to spaces, since actual tab characters are
+" needed, and have indentation at 8 chars to be sure that all indents are tabs
+" (despite the mappings later):
+autocmd FileType make set noexpandtab shiftwidth=8
+
+" python
+autocmd FileType python let python_highlight_all=1
+autocmd FileType python set foldmethod=indent
+autocmd FileType python set shiftwidth=4
+autocmd FileType python set expandtab
+
+" ruby
+autocmd FileType ruby set foldmethod=indent
+autocmd FileType ruby set shiftwidth=2
+
+" C
+autocmd FileType C set expandtab
+autocmd FileType C set foldmethod=indent
+
+" C++
+autocmd FileType C++ set expandtab
+autocmd FileType C++ set foldmethod=indent
+
+" Puppet
+au BufRead,BufNewFile *.pp set shiftwidth=2
+
+" YAML
+autocmd FileType yaml set foldmethod=indent
+au BufRead,BufNewFile *.yml set shiftwidth=2
+au BufRead,BufNewFile *.yaml set shiftwidth=2
+
+" JSON
+autocmd FileType json set foldmethod=syntax
+au BufRead,BufNewFile *.json set shiftwidth=2
+au BufRead,BufNewFile *.json set shiftwidth=2
+
