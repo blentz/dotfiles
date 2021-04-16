@@ -10,16 +10,18 @@ source_file "/etc/bashrc"
 # source_file "${HOME}/bin/oc_completion.sh"
 source_file "/usr/local/etc/bash_completion"
 
+PYTHON_VERSION=$(python3 --version | awk '{split($2,a,"."); print a[1]"."a[2]}')
+
 export GPG_TTY=$(tty)
 export LC_ALL=en_US.UTF-8
 export GOPATH=$HOME/.go
-export PATH="$PATH:/usr/local/bin:$HOME/Library/Python/3.9/bin:$HOME/bin:$GOPATH:$GOPATH/bin"
+export PATH="$PATH:/usr/local/bin:$HOME/Library/Python/$PYTHON_VERSION/bin:$HOME/bin:$GOPATH:$GOPATH/bin"
 
-powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
+# powerline-daemon -q
+# POWERLINE_BASH_CONTINUATION=1
+# POWERLINE_BASH_SELECT=1
 # source_file '/usr/share/powerline/bash/powerline.sh'
-source_file "${HOME}/Library/Python/3.9/lib/python/site-packages/powerline/bindings/bash/powerline.sh"
+# source_file "${HOME}/Library/Python/3.9/lib/python/site-packages/powerline/bindings/bash/powerline.sh"
 
 source_file "/etc/java/java.conf"
 if [ ! -z "${JAVA_HOME}" ]; then
@@ -90,3 +92,5 @@ function rebaseupstream () {
 function update-env() {
     source $1 && export $(grep "^[^#;]" $1 | cut -d= -f1)
 }
+
+eval "$(starship init bash)"

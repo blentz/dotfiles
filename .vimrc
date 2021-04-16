@@ -182,7 +182,7 @@ autocmd FileType * nested :call tagbar#autoopen(0)
 nnoremap <F12> :Black<CR>
 
 " max line-length to use before wrapping
-let g:black_linelength = 119
+let g:black_linelength = 79
 
 let g:black_virtualenv="~/.vim/black"
 
