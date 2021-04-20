@@ -8,14 +8,22 @@ function source_file() {
 
 source_file "/etc/bashrc"
 # source_file "${HOME}/bin/oc_completion.sh"
-source_file "/usr/local/etc/bash_completion"
+if type brew &>/dev/null; then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+      [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+    done
+  fi
+fi
 
 PYTHON_VERSION=$(python3 --version | awk '{split($2,a,"."); print a[1]"."a[2]}')
 
 export GPG_TTY=$(tty)
 export LC_ALL=en_US.UTF-8
 export GOPATH=$HOME/.go
-export PATH="$PATH:/usr/local/bin:$HOME/Library/Python/$PYTHON_VERSION/bin:$HOME/bin:$GOPATH:$GOPATH/bin"
 
 # powerline-daemon -q
 # POWERLINE_BASH_CONTINUATION=1
@@ -92,5 +100,12 @@ function rebaseupstream () {
 function update-env() {
     source $1 && export $(grep "^[^#;]" $1 | cut -d= -f1)
 }
+
+export PATH="/usr/local/bin:$HOME/.pyenv/bin:$HOME/Library/Python/$PYTHON_VERSION/bin:$HOME/bin:$GOPATH:$GOPATH/bin:$PATH"
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
 
 eval "$(starship init bash)"

@@ -4,6 +4,10 @@ add_newline = true
 success_symbol = "[➜](bold green)"
 error_symbol = "[‼](bold red)"
 
+[cmd_duration]
+show_notifications = true
+min_time_to_notify = 60000
+
 [directory]
 truncate_length = 5
 truncate_symbol = "…/"
@@ -14,6 +18,10 @@ format = "[$symbol $project]($style) "
 
 [helm]
 format = "[$symbol]($style) "
+
+[nodejs]
+format = "[$symbol]($style) "
+symbol = "ɲ "
 
 # Disable the package module, hiding it from the prompt completely
 [package]
