@@ -25,12 +25,6 @@ export GPG_TTY=$(tty)
 export LC_ALL=en_US.UTF-8
 export GOPATH=$HOME/.go
 
-# powerline-daemon -q
-# POWERLINE_BASH_CONTINUATION=1
-# POWERLINE_BASH_SELECT=1
-# source_file '/usr/share/powerline/bash/powerline.sh'
-# source_file "${HOME}/Library/Python/3.9/lib/python/site-packages/powerline/bindings/bash/powerline.sh"
-
 source_file "/etc/java/java.conf"
 if [ ! -z "${JAVA_HOME}" ]; then
     export JAVA_HOME
@@ -59,6 +53,12 @@ alias diff='diff -u'
 alias git="/usr/local/bin/hub"
 alias yum='/usr/bin/dnf'
 
+alias ls='/bin/ls -G'
+alias ll='ls -l'
+alias la='ls -la'
+export LSCOLORS="GxfxcxdxcxegedaBagabad"
+alias grep='/usr/local/bin/ag'
+
 alias docker-rmi-untagged='docker rmi $(docker images -q -f "dangling=true")'
 alias docker-rm-exited='docker rm -v $(docker ps -qa --no-trunc --filter "status=exited")'
 # alias podman-rmi-untagged='podman rmi $(podman images -q -f "dangling=true")'
@@ -70,12 +70,17 @@ alias docker-rm-exited='docker rm -v $(docker ps -qa --no-trunc --filter "status
 #                             --restart always \
 #                             muccg/devpi || podman start devpi'
 
-# alias app-interface-run='podman run -d --name qontract-server --restart always --publish 4000:4000 \
-#                                     -e APP_INTERFACE_PATH=/app-interface \
-#                                     -v /home/blentz/git/app-interface:/app-interface:Z \
-#                                     -e LOAD_METHOD=fs \
-#                                     -e DATAFILES_FILE=/app-interface/data.json \
-#                                     qontract-server || podman start qontract-server'
+alias github-token="grep oauth_token /Users/brett.lentz/.config/gh/hosts.yml | awk '{print \$2}'"
+alias gpom="git pull origin master"
+alias ghpr="gh pr create -d"
+
+function set-kube-namespace() {
+    kubectl config set-context --current --namespace="$1"
+}
+
+function tamr_clone() {
+    git clone git@github.com:Datatamer/$1
+}
 
 function rpmspec-download-upstream() {
     spectool -g -S $1
@@ -101,11 +106,17 @@ function update-env() {
     source $1 && export $(grep "^[^#;]" $1 | cut -d= -f1)
 }
 
-export PATH="/usr/local/bin:$HOME/.pyenv/bin:$HOME/Library/Python/$PYTHON_VERSION/bin:$HOME/bin:$GOPATH:$GOPATH/bin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.pyenv/bin:$HOME/Library/Python/$PYTHON_VERSION/bin:$HOME/bin:$GOPATH:$GOPATH/bin:$PATH"
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
+
+export DOCKER_CONFIG="~/.docker"
+export HELM_REGISTRY_CONFIG="${DOCKER_CONFIG}/config.json"
+
+# mass clone
+# curl -s https://$(cat ~/ghtoken):@api.github.com/orgs/Datatamer/repos?per_page=2000 | jq .[].ssh_url | xargs -n 1 git clone
 
 eval "$(starship init bash)"

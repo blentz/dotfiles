@@ -1,7 +1,7 @@
 add_newline = true
 
 [character]
-success_symbol = "[➜](bold green)"
+success_symbol = "[➜](green)"
 error_symbol = "[‼](bold red)"
 
 [cmd_duration]
@@ -9,15 +9,24 @@ show_notifications = true
 min_time_to_notify = 60000
 
 [directory]
-truncate_length = 5
-truncate_symbol = "…/"
+truncation_length = 3
+truncation_symbol = "/…/"
 truncate_to_repo = false
+style = "bold green"
 
 [gcloud]
-format = "[$symbol $project]($style) "
+format = "on [$symbol $active]($style) "
+
+[git_branch]
+style = "purple"
 
 [helm]
 format = "[$symbol]($style) "
+
+[kubernetes]
+disabled = false
+format = '[$symbol$context( \($namespace\))]($style) in '
+style = "cyan"
 
 [nodejs]
 format = "[$symbol]($style) "
@@ -28,7 +37,8 @@ symbol = "ɲ "
 disabled = true
 
 [python]
-format = "[${symbol}${pyenv_prefix} ($virtualenv )]($style)"
+format = "[${symbol}${pyenv_prefix}(( <$virtualenv> at )$version) ]($style)"
+style = "red"
 
 [status]
 disabled = false
@@ -39,3 +49,4 @@ format = "[$symbol]($style) "
 [time]
 disabled = false
 format = "[$time]($style) "
+style = "green"

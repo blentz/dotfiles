@@ -60,7 +60,7 @@ set noshowmode
 set noshowcmd
 
 " have the mouse enabled all the time:
-"set mouse=a
+set mouse=a
 
 " don't have files trying to override this .vimrc:
 set nomodeline
@@ -226,6 +226,40 @@ augroup END
 " jinja templates
 autocmd BufNewFile,BufRead *.j2 set syntax=jinja
 
+" terraform
+let g:terraform_align=1
+let g:terraform_fold_sections=1
+let g:terraform_fmt_on_save=1
+
+" go config for tagbar (needs gotags)
+let g:tagbar_type_go = {
+	\ 'ctagstype' : 'go',
+	\ 'kinds'     : [
+		\ 'p:package',
+		\ 'i:imports:1',
+		\ 'c:constants',
+		\ 'v:variables',
+		\ 't:types',
+		\ 'n:interfaces',
+		\ 'w:fields',
+		\ 'e:embedded',
+		\ 'm:methods',
+		\ 'r:constructor',
+		\ 'f:functions'
+	\ ],
+	\ 'sro' : '.',
+	\ 'kind2scope' : {
+		\ 't' : 'ctype',
+		\ 'n' : 'ntype'
+	\ },
+	\ 'scope2kind' : {
+		\ 'ctype' : 't',
+		\ 'ntype' : 'n'
+	\ },
+	\ 'ctagsbin'  : 'gotags',
+	\ 'ctagsargs' : '-sort -silent'
+\ }
+
 " set the runtime path to include Vundle and initialize
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -246,6 +280,9 @@ if exists(':Plugin')
     Bundle 'Rykka/riv.vim'
     Plugin 'powerline/powerline-fonts'
     Plugin 'https://github.com/Glench/Vim-Jinja2-Syntax.git'
+    Plugin 'hashivim/vim-terraform'
+    Plugin 'andrewstuart/vim-kubernetes'
+    Plugin 'https://github.com/moll/vim-bbye.git'
 endif
 " All of your Plugins must be added before the following line
 call vundle#end()
@@ -314,3 +351,5 @@ autocmd FileType json set foldmethod=syntax
 au BufRead,BufNewFile *.json set shiftwidth=2
 au BufRead,BufNewFile *.json set shiftwidth=2
 
+" prepend bbye to runtimepath
+set runtimepath^=~/.vim/bundle/bbye
