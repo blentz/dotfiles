@@ -72,7 +72,7 @@ alias docker-rm-exited='docker rm -v $(docker ps -qa --no-trunc --filter "status
 
 alias github-token="grep oauth_token /Users/brett.lentz/.config/gh/hosts.yml | awk '{print \$2}'"
 alias gpom="git pull origin master"
-alias ghpr="gh pr create -d"
+alias ghpr="gh pr create -d -a @me -r Datatamer/devops"
 
 function set-kube-namespace() {
     kubectl config set-context --current --namespace="$1"
