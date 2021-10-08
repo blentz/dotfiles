@@ -106,14 +106,14 @@ function update-env() {
     source $1 && export $(grep "^[^#;]" $1 | cut -d= -f1)
 }
 
-export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.pyenv/bin:$HOME/Library/Python/$PYTHON_VERSION/bin:$HOME/bin:$GOPATH:$GOPATH/bin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.pyenv/bin:$HOME/bin:$GOPATH:$GOPATH/bin:$PATH"
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
 
-export DOCKER_CONFIG="~/.docker"
+export DOCKER_CONFIG="${HOME}/.docker"
 export HELM_REGISTRY_CONFIG="${DOCKER_CONFIG}/config.json"
 
 # mass clone

@@ -1,6 +1,6 @@
 [user]
     name = Brett Lentz
-    email = brett.lentz@tamr.com
+	email = blentz@users.noreply.github.com
     signingkey = AF2ABEE8
 
 [color]
@@ -81,3 +81,9 @@
 	rebase = true
 [init]
 	defaultBranch = main
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[status]
+	submoduleSummary = true
+[diff]
+	submodule = log
