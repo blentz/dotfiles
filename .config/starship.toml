@@ -1,8 +1,19 @@
 add_newline = true
 
+# left side
+format = """[ ╔═](green)$fill[⇒](bold green) $status$jobs
+[ ║](green) $time $directory
+[ ║](green) $kubernetes $aws $gcloud
+[ ║](green) ($all) [╚](green)$fill
+$character
+"""
+
+[aws]
+format = 'on [A$symbol($profile )(\($region\) )(\[$duration\])]($style)'
+
 [character]
-success_symbol = "[➜](green)"
-error_symbol = "[‼](bold red)"
+success_symbol = "👉"
+error_symbol = "❌"
 
 [cmd_duration]
 show_notifications = true
@@ -14,8 +25,12 @@ truncation_symbol = "/…/"
 truncate_to_repo = false
 style = "bold green"
 
+[fill]
+symbol = "═"
+style = "bold green"
+
 [gcloud]
-format = "on [$symbol $active]($style) "
+format = 'on [G$symbol$project( \($region\))]($style)'
 
 [git_branch]
 style = "purple"
@@ -25,7 +40,7 @@ format = "[$symbol]($style) "
 
 [kubernetes]
 disabled = false
-format = '[$symbol$context( \($namespace\))]($style) in '
+format = '[$symbol$context(\($namespace\))]($style)'
 style = "cyan"
 
 [nodejs]

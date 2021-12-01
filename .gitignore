@@ -1,1 +1,7 @@
 **/*.pyc
+
+.config/gcloud
+.config/gh
+.config/htop
+.config/configstore
+.config/iterm2

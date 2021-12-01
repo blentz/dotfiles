@@ -71,7 +71,7 @@ alias docker-rm-exited='docker rm -v $(docker ps -qa --no-trunc --filter "status
 #                             muccg/devpi || podman start devpi'
 
 alias github-token="grep oauth_token /Users/brett.lentz/.config/gh/hosts.yml | awk '{print \$2}'"
-alias gpom="git pull origin master"
+alias gpom="git branch --list master main develop | tr -d '*' | xargs -n 1 git pull origin"
 alias ghpr="gh pr create -d -a @me -r Datatamer/devops"
 
 function set-kube-namespace() {
@@ -112,11 +112,20 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
+# export GITHUB_TOKEN=$(grep --nonumbers oauth_token /Users/brett.lentz/.config/gh/hosts.yml | awk '{print $2}')
 
 export DOCKER_CONFIG="${HOME}/.docker"
 export HELM_REGISTRY_CONFIG="${DOCKER_CONFIG}/config.json"
 
-# mass clone
-# curl -s https://$(cat ~/ghtoken):@api.github.com/orgs/Datatamer/repos?per_page=2000 | jq .[].ssh_url | xargs -n 1 git clone
+function tfgrep() {
+    if [ -z $1 ]; then
+        echo "usage: tfgrep [searchstring]"
+        return
+    fi
+    ag -rl -G '\.*\.tf' $1 ${HOME}/git/Datatamer
+}
+alias mvim="open -a MacVim.app $1"
+alias sort-launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
+
 
 eval "$(starship init bash)"
