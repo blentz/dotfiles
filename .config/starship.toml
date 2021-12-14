@@ -1,36 +1,35 @@
 add_newline = true
 
 # left side
-format = """[ ╔═](green)$fill[⇒](bold green) $status$jobs
-[ ║](green) $time $directory
-[ ║](green) $kubernetes $aws $gcloud
-[ ║](green) ($all) [╚](green)$fill
-$character
+format = """[ ╔═](grey)$fill[⇒ ](grey)$status $jobs
+[ ║](grey) $aws$gcloud $kubernetes
+[ ║](grey) $directory$git_status$git_branch$git_commit$git_state $all [╚](grey)$fill
+$time$character
 """
 
 [aws]
-format = 'on [A$symbol($profile )(\($region\) )(\[$duration\])]($style)'
+format = '[A$symbol($profile )(\($region\) )(\[$duration\])]($style)'
 
 [character]
-success_symbol = "👉"
-error_symbol = "❌"
+success_symbol = '[☞ ](bold green)'
+error_symbol = '[➤ ](bold red)'
 
 [cmd_duration]
 show_notifications = true
 min_time_to_notify = 60000
 
 [directory]
-truncation_length = 3
+truncation_length = 5
 truncation_symbol = "/…/"
 truncate_to_repo = false
 style = "bold green"
 
 [fill]
 symbol = "═"
-style = "bold green"
+style = "grey"
 
 [gcloud]
-format = 'on [G$symbol$project( \($region\))]($style)'
+format = '[G$symbol$project( \($region\))]($style)'
 
 [git_branch]
 style = "purple"
@@ -64,4 +63,4 @@ format = "[$symbol]($style) "
 [time]
 disabled = false
 format = "[$time]($style) "
-style = "green"
+style = "grey"

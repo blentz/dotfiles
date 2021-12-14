@@ -110,12 +110,12 @@ set encoding=utf-8
 
 " added the sys.path.append so that powerline import works in virtualenv
 " the three powerline import lines do not work in virtualenv otherwise
-if has('python3')
-    python3 import sys; sys.path.append("/usr/lib/python3.9/site-packages/")
-    python3 from powerline.vim import setup as powerline_setup
-    python3 powerline_setup()
-    python3 del powerline_setup
-endif
+" if has('python3')
+"     python3 import sys; sys.path.append("/usr/lib/python3.9/site-packages/")
+"     python3 from powerline.vim import setup as powerline_setup
+"     python3 powerline_setup()
+"     python3 del powerline_setup
+" endif
 
 " tabbar options, don't run in vimdiff'
 if &diff

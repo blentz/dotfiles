@@ -81,6 +81,7 @@
 	rebase = true
 [init]
 	defaultBranch = main
+	templateDir = /Users/brett.lentz/.git-template
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [status]
