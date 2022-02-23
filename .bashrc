@@ -124,8 +124,19 @@ function tfgrep() {
     fi
     ag -rl -G '\.*\.tf' $1 ${HOME}/git/Datatamer
 }
+function yamlgrep() {
+    if [ -z $1 ]; then
+        echo "usage: tfgrep [searchstring]"
+        return
+    fi
+    ag -rl -G '\.*\.yaml' $1 ${HOME}/git/Datatamer
+}
 alias mvim="open -a MacVim.app $1"
 alias sort-launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
 
 
 eval "$(starship init bash)"
+
+# BEGIN_KITTY_SHELL_INTEGRATION
+if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
+# END_KITTY_SHELL_INTEGRATION

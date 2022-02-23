@@ -6,3 +6,4 @@
 .config/configstore
 .config/iterm2
 .config/infracost
+.config/gtk*
