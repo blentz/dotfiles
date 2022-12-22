@@ -260,6 +260,9 @@ let g:tagbar_type_go = {
 	\ 'ctagsargs' : '-sort -silent'
 \ }
 
+" snipmate config
+let g:snipMate = { 'snippet_version': 1 }
+
 " set the runtime path to include Vundle and initialize
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -292,6 +295,7 @@ if exists(':Plugin')
     Plugin 'tomtom/tlib_vim'
     Plugin 'garbas/vim-snipmate'
     Plugin 'honza/vim-snippets'
+    Plugin 'fatih/vim-go'
 endif
 " All of your Plugins must be added before the following line
 call vundle#end()
