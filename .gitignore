@@ -1,4 +1,5 @@
 **/*.pyc
+**/*.sw[op]
 
 .config/gcloud
 .config/gh
@@ -7,3 +8,7 @@
 .config/iterm2
 .config/infracost
 .config/gtk*
+.config/containers
+.config/karabiner
+.config/lsd
+.config/packer

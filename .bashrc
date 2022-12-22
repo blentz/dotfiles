@@ -8,6 +8,7 @@ function source_file() {
 
 source_file "/etc/bashrc"
 # source_file "${HOME}/bin/oc_completion.sh"
+
 if type brew &>/dev/null; then
   HOMEBREW_PREFIX="$(brew --prefix)"
   if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
@@ -46,14 +47,12 @@ PROMPT_COMMAND="${PROMPT_COMMAND} save_history"
 # export PIP_TRUSTED_HOST='localhost'
 # export PIPENV_PYPI_MIRROR="http://${PIP_TRUSTED_HOST}:3141/root/pypi/+simple/"
 
-# alias gpa='CURR=`git branch | grep "\*" | tr -d "*"`; git fetch; for x in $(git branch -vv | grep origin | tr -d "*" | awk '\''{print $1}'\''); do git checkout $x && git rebase origin/${x}; done; git checkout ${CURR}'
-
 alias rmorig='find . -name "*.orig" -delete'
 alias diff='diff -u'
 alias git="/usr/local/bin/hub"
 alias yum='/usr/bin/dnf'
 
-alias ls='/bin/ls -G'
+alias ls='/usr/local/bin/lsd -F'
 alias ll='ls -l'
 alias la='ls -la'
 export LSCOLORS="GxfxcxdxcxegedaBagabad"
@@ -74,7 +73,7 @@ alias github-token="grep oauth_token /Users/brett.lentz/.config/gh/hosts.yml | a
 alias gpom="git branch --list master main develop | tr -d '*' | xargs -n 1 git pull origin"
 alias ghpr="gh pr create -d -a @me -r Datatamer/devops"
 
-function set-kube-namespace() {
+function set_kube_namespace() {
     kubectl config set-context --current --namespace="$1"
 }
 
@@ -82,7 +81,7 @@ function tamr_clone() {
     git clone git@github.com:Datatamer/$1
 }
 
-function rpmspec-download-upstream() {
+function rpmspec_download_upstream() {
     spectool -g -S $1
 }
 
@@ -102,9 +101,34 @@ function rebaseupstream () {
   git checkout ${startbranch}
 }
 
-function update-env() {
+function update_env() {
     source $1 && export $(grep "^[^#;]" $1 | cut -d= -f1)
 }
+function tfgrep() {
+    if [ -z $1 ]; then
+        echo "usage: tfgrep [searchstring]"
+        return
+    fi
+    ag -rl -G '\.*\.tf$' $1 ${HOME}/git/Datatamer
+}
+function yamlgrep() {
+    if [ -z $1 ]; then
+        echo "usage: yamlgrep [searchstring]"
+        return
+    fi
+    ag -rl --yaml $1 ${HOME}/git/Datatamer
+}
+function tfmodup() {
+    if [ -z $1 ]; then
+        echo "usage: tfmodup modname 1.2.3"
+        return
+    fi
+    grep -rl $1 | xargs gsed -i 's/'"${1}"'.git?ref.*/'"${1}"'.git?ref=v'"${2}"'\"/'
+}
+function gitbr() {
+    git checkout -b $1 origin/$(git branch --list master main develop | tr -d '* ')
+}
+
 
 export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.pyenv/bin:$HOME/bin:$GOPATH:$GOPATH/bin:$PATH"
 
@@ -112,31 +136,15 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
-# export GITHUB_TOKEN=$(grep --nonumbers oauth_token /Users/brett.lentz/.config/gh/hosts.yml | awk '{print $2}')
 
 export DOCKER_CONFIG="${HOME}/.docker"
 export HELM_REGISTRY_CONFIG="${DOCKER_CONFIG}/config.json"
+export TF_LOG=WARN
 
-function tfgrep() {
-    if [ -z $1 ]; then
-        echo "usage: tfgrep [searchstring]"
-        return
-    fi
-    ag -rl -G '\.*\.tf' $1 ${HOME}/git/Datatamer
-}
-function yamlgrep() {
-    if [ -z $1 ]; then
-        echo "usage: tfgrep [searchstring]"
-        return
-    fi
-    ag -rl -G '\.*\.yaml' $1 ${HOME}/git/Datatamer
-}
 alias mvim="open -a MacVim.app $1"
 alias sort-launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
 
-
-eval "$(starship init bash)"
-
-# BEGIN_KITTY_SHELL_INTEGRATION
-if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
-# END_KITTY_SHELL_INTEGRATION
+STARSHIP_INIT=$(starship init bash --print-full-init)
+STARSHIP_COMPLETION=$(starship completions bash)
+eval "${STARSHIP_INIT}"
+eval "${STARSHIP_COMPLETION}"

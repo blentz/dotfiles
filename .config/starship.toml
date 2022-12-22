@@ -1,8 +1,8 @@
 add_newline = true
 
 format = """[╭─accounts─➜ ](blue) $username$gcloud$aws$kubernetes
-[├─project──➜ ](red) $directory$package$git_branch $git_status $git_state $git_metrics$python$golang $terraform$docker_context$helm
-[├─system───➜ ](yellow) $time$status$cmd_duration$hostname$memory_usage$jobs$battery
+[├─system───➜ ](red) $time$status$cmd_duration$hostname$memory_usage$jobs$battery
+[├─project──➜ ](yellow) $directory$package$git_branch $git_status $git_state $git_metrics$python$golang $terraform$docker_context$helm
 [╰─cmd──────➜ ](green) $character
 """
 
@@ -29,6 +29,9 @@ style = "grey"
 
 [gcloud]
 format = '[G$symbol($project )(\($region\) )]($style)'
+
+[git_status]
+modified = "!!"
 
 [git_branch]
 style = "purple"

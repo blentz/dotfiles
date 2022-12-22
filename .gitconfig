@@ -1,6 +1,6 @@
 [user]
     name = Brett Lentz
-	email = blentz@users.noreply.github.com
+    email = blentz@users.noreply.github.com
     signingkey = AF2ABEE8
 
 [color]
@@ -52,7 +52,7 @@
     autosetuprebase = always
 
 [merge]
-    tool = /usr/local/bin/meld
+    ;tool = /usr/local/bin/meld
 
 [receive]
     denyDeleteCurrent = warn
@@ -78,13 +78,26 @@
 [gpg]
     program = /usr/local/bin/gpg
 [pull]
-	rebase = true
+    rebase = true
 [init]
-	defaultBranch = main
-	templateDir = /Users/brett.lentz/.git-template
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+    defaultBranch = main
+    templateDir = /Users/brett.lentz/.git-template
+
 [status]
 	submoduleSummary = true
 [diff]
-	submodule = log
+    submodule = log
+    tool = difft
+
+[difftool]
+    prompt = false
+
+[difftool "difft"]
+    cmd = /usr/local/bin/difft --display=inline --missing-as-empty --skip-unchanged "$LOCAL" "$REMOTE"
+
+# Use a pager for large output, just like other git commands.
+[pager]
+    difftool = true
+
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/

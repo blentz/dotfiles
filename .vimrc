@@ -266,15 +266,19 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 if exists(':Plugin')
     Plugin 'Valloric/YouCompleteMe'
-    Plugin 'godlygeek/tabular'
     Plugin 'plasticboy/vim-markdown'
+    Plugin 'godlygeek/tabular'
     Plugin 'tpope/vim-fugitive'
+    Plugin 'airblade/vim-gitgutter'
     Plugin 'vim-syntastic/syntastic'
     Plugin 'scrooloose/nerdtree'
+    Plugin 'jistr/vim-nerdtree-tabs'
     Plugin 'Xuyuanp/nerdtree-git-plugin'
     Plugin 'flazz/vim-colorschemes'
     Plugin 'majutsushi/tagbar'
-    Plugin 'jiangmiao/auto-pairs'
+    Plugin 'xolox/vim-misc'
+    Plugin 'xolox/vim-easytags'
+    Plugin 'Raimondi/delimitMate'
     Plugin 'habamax/vim-asciidoctor'
     Plugin 'psf/black', { 'branch': 'stable' }
     Bundle 'Rykka/riv.vim'
@@ -282,7 +286,12 @@ if exists(':Plugin')
     Plugin 'https://github.com/Glench/Vim-Jinja2-Syntax.git'
     Plugin 'hashivim/vim-terraform'
     Plugin 'andrewstuart/vim-kubernetes'
+    Plugin 'ekalinin/Dockerfile.vim'
     Plugin 'https://github.com/moll/vim-bbye.git'
+    Plugin 'MarcWeber/vim-addon-mw-utils'
+    Plugin 'tomtom/tlib_vim'
+    Plugin 'garbas/vim-snipmate'
+    Plugin 'honza/vim-snippets'
 endif
 " All of your Plugins must be added before the following line
 call vundle#end()
@@ -350,6 +359,11 @@ au BufRead,BufNewFile *.yaml set shiftwidth=2
 autocmd FileType json set foldmethod=syntax
 au BufRead,BufNewFile *.json set shiftwidth=2
 au BufRead,BufNewFile *.json set shiftwidth=2
+
+" Groovy
+autocmd FileType groovy set foldmethod=syntax
+au BufRead,BufNewFile *.groovy set shiftwidth=2
+au BufRead,BufNewFile *.groovy set shiftwidth=2
 
 " prepend bbye to runtimepath
 set runtimepath^=~/.vim/bundle/bbye
