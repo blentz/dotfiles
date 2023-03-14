@@ -23,6 +23,9 @@ truncation_symbol = "/…/"
 truncate_to_repo = false
 style = "bold green"
 
+[docker_context]
+format = 'via [$symbol]($style) '
+
 [fill]
 symbol = "═"
 style = "grey"
