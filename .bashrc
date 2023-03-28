@@ -49,10 +49,10 @@ PROMPT_COMMAND="${PROMPT_COMMAND} save_history"
 
 alias rmorig='find . -name "*.orig" -delete'
 alias diff='diff -u'
-alias git="/usr/local/bin/hub"
+alias git="/opt/homebrew/bin/hub"
 alias yum='/usr/bin/dnf'
 
-alias ls='/usr/local/bin/lsd -F'
+alias ls='/opt/homebrew/bin/lsd -F'
 alias ll='ls -l'
 alias la='ls -la'
 export LSCOLORS="GxfxcxdxcxegedaBagabad"
@@ -71,14 +71,9 @@ alias docker-rm-exited='docker rm -v $(docker ps -qa --no-trunc --filter "status
 
 alias github-token="grep oauth_token /Users/brett.lentz/.config/gh/hosts.yml | awk '{print \$2}'"
 alias gpom="git branch --list master main develop | tr -d '*' | xargs -n 1 git pull origin"
-alias ghpr="gh pr create -d -a @me -r Datatamer/devops"
 
 function set_kube_namespace() {
     kubectl config set-context --current --namespace="$1"
-}
-
-function tamr_clone() {
-    git clone git@github.com:Datatamer/$1
 }
 
 function rpmspec_download_upstream() {
@@ -104,20 +99,6 @@ function rebaseupstream () {
 function update_env() {
     source $1 && export $(grep "^[^#;]" $1 | cut -d= -f1)
 }
-function tfgrep() {
-    if [ -z $1 ]; then
-        echo "usage: tfgrep [searchstring]"
-        return
-    fi
-    ag -rl -G '\.*\.tf$' $1 ${HOME}/git/Datatamer
-}
-function yamlgrep() {
-    if [ -z $1 ]; then
-        echo "usage: yamlgrep [searchstring]"
-        return
-    fi
-    ag -rl --yaml $1 ${HOME}/git/Datatamer
-}
 function tfmodup() {
     if [ -z $1 ]; then
         echo "usage: tfmodup modname 1.2.3"
@@ -130,7 +111,7 @@ function gitbr() {
 }
 
 
-export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.pyenv/bin:$HOME/bin:$GOPATH:$GOPATH/bin:$PATH"
+export PATH="/opt/homebrew/bin:/usr/local/sbin:/usr/local/bin:$HOME/.pyenv/bin:$HOME/bin:$GOPATH:$GOPATH/bin:$PATH"
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"

@@ -296,6 +296,7 @@ if exists(':Plugin')
     Plugin 'garbas/vim-snipmate'
     Plugin 'honza/vim-snippets'
     Plugin 'fatih/vim-go'
+    Plugin 'jiangmiao/auto-pairs'
 endif
 " All of your Plugins must be added before the following line
 call vundle#end()

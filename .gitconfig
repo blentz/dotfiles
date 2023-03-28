@@ -1,7 +1,7 @@
 [user]
     name = Brett Lentz
     email = blentz@users.noreply.github.com
-    signingkey = AF2ABEE8
+    # signingkey = AF2ABEE8
 
 [color]
     diff = auto
@@ -73,15 +73,15 @@
     prune = true
 
 [commit]
-    gpgsign = true
+    gpgsign = false
 
 [gpg]
-    program = /usr/local/bin/gpg
+    program = /opt/homebrew/bin/gpg
 [pull]
     rebase = true
 [init]
     defaultBranch = main
-    templateDir = /Users/brett.lentz/.git-template
+    # templateDir = /Users/brett.lentz/.git-template
 
 [status]
 	submoduleSummary = true
