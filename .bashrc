@@ -1,4 +1,6 @@
 # .bashrc
+export BASH_SILENCE_DEPRECATION_WARNING=1
+export HOMEBREW_PREFIX="/opt/homebrew"
 
 function source_file() {
     if [ -f $1 ]; then
@@ -6,8 +8,9 @@ function source_file() {
     fi
 }
 
-source_file "/etc/bashrc"
 # source_file "${HOME}/bin/oc_completion.sh"
+source_file "${HOME}/.gitlab-completion.sh"
+source_file "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
 
 if type brew &>/dev/null; then
   HOMEBREW_PREFIX="$(brew --prefix)"
@@ -19,6 +22,11 @@ if type brew &>/dev/null; then
     done
   fi
 fi
+
+# install fzf completions if needed
+[ -f ${HOMEBREW_PREFIX}/opt/fzf/install ] && [ ! -f $HOME/.fzf.bash ] && ${HOMEBREW_PREFIX}/opt/fzf/install
+
+source_file "/etc/bashrc"
 
 PYTHON_VERSION=$(python3 --version | awk '{split($2,a,"."); print a[1]"."a[2]}')
 
@@ -49,19 +57,19 @@ PROMPT_COMMAND="${PROMPT_COMMAND} save_history"
 
 alias rmorig='find . -name "*.orig" -delete'
 alias diff='diff -u'
-alias git="/opt/homebrew/bin/hub"
+alias git="${HOMEBREW_PREFIX}/bin/hub"
 alias yum='/usr/bin/dnf'
 
-alias ls='/opt/homebrew/bin/lsd -F'
+alias ls="${HOMEBREW_PREFIX}/bin/lsd -F"
 alias ll='ls -l'
 alias la='ls -la'
-export LSCOLORS="GxfxcxdxcxegedaBagabad"
-alias grep='/usr/local/bin/ag'
+export LSCOLORS='GxfxcxdxcxegedaBagabad'
+alias grep="${HOMEBREW_PREFIX}/bin/ag"
 
 alias docker-rmi-untagged='docker rmi $(docker images -q -f "dangling=true")'
 alias docker-rm-exited='docker rm -v $(docker ps -qa --no-trunc --filter "status=exited")'
-# alias podman-rmi-untagged='podman rmi $(podman images -q -f "dangling=true")'
-# alias podman-rm-exited='podman rm -v $(podman ps -qa --no-trunc --filter "status=exited")'
+alias podman-rmi-untagged='podman rmi $(podman images -q -f "dangling=true")'
+alias podman-rm-exited='podman rm -v $(podman ps -qa --no-trunc --filter "status=exited")'
 
 # alias devpi-run='podman run -d --name devpi --publish 3141:3141 \
 #                             --volume /home/blentz/.devpi:/data:Z \
@@ -129,3 +137,7 @@ STARSHIP_INIT=$(starship init bash --print-full-init)
 STARSHIP_COMPLETION=$(starship completions bash)
 eval "${STARSHIP_INIT}"
 eval "${STARSHIP_COMPLETION}"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# gcloud auth print-access-token | podman login -u oauth2accesstoken --password-stdin

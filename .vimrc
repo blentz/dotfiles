@@ -106,6 +106,18 @@ set expandtab
 set textwidth=119
 set encoding=utf-8
 
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+" files.
+function! AppendModeline()
+  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
+          \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+            let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+  call append(line("$"), l:modeline)
+  endfunction
+let mapleader = ","
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
 " * Plugin Configs
 
 " added the sys.path.append so that powerline import works in virtualenv
@@ -151,7 +163,7 @@ let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " NERDTree
-nmap <F7> :NERDTreeToggle<CR>
+nmap <Leader>nt :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
 
 " ignore certain files
@@ -161,7 +173,7 @@ let NERDTreeIgnore = ['__pycache__', '\.sw[po]$']
 autocmd vimenter * if !argc() | NERDTree | endif
 
 " Tagbar
-nmap <F8> :TagbarToggle<CR>
+nmap <Leader>tb :TagbarToggle<CR>
 
 " open tagbar when opening Vim with a supported file/files
 autocmd FileType * call tagbar#autoopen(0)
@@ -179,7 +191,7 @@ autocmd FileType * nested :call tagbar#autoopen(0)
 " autocmd BufWritePre *.py execute ':Black'
 
 " F12 to run Black
-nnoremap <F12> :Black<CR>
+nnoremap <Leader>bl :Black<CR>
 
 " max line-length to use before wrapping
 let g:black_linelength = 79

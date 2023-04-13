@@ -1,7 +1,9 @@
 [user]
     name = Brett Lentz
-    email = blentz@users.noreply.github.com
-    # signingkey = AF2ABEE8
+    # email = blentz@users.noreply.github.com
+    # email = brett.lentz@gmail.com
+    email = brett.lentz@analog.com
+    signingkey = 08843693B9A82FBD
 
 [color]
     diff = auto
@@ -73,7 +75,7 @@
     prune = true
 
 [commit]
-    gpgsign = false
+    gpgsign = true
 
 [gpg]
     program = /opt/homebrew/bin/gpg
@@ -99,5 +101,8 @@
 [pager]
     difftool = true
 
-[url "ssh://git@github.com/"]
-    insteadOf = https://github.com/
+# [url "ssh://git@github.com/"]
+#     insteadOf = https://github.com/
+
+[url "https://github.com/"]
+    insteadOf = ssh://git@github.com/
