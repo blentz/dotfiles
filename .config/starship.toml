@@ -63,7 +63,7 @@ style = "red"
 disabled = false
 
 [terraform]
-format = "[$symbol]($style) "
+format = "[$symbol$version]($style) "
 
 [time]
 disabled = false

@@ -117,9 +117,15 @@ function tfmodup() {
 function gitbr() {
     git checkout -b $1 origin/$(git branch --list master main develop | tr -d '* ')
 }
+function diff-tfstate() {
+    if [ -d $1 ] && [ -d $2 ]; then
+        diff -r -x .git -x .terraform -x .terraform.lock.hcl -x README.md --color=auto $1 $2
+    else
+        usage: diff-tfstate dir1 dir2
+    fi
+}
 
-
-export PATH="/opt/homebrew/bin:/usr/local/sbin:/usr/local/bin:$HOME/.pyenv/bin:$HOME/bin:$GOPATH:$GOPATH/bin:$PATH"
+export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/opt/postgresql@15/bin:/usr/local/sbin:/usr/local/bin:$HOME/.pyenv/bin:$HOME/bin:$GOPATH:$GOPATH/bin:$PATH"
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
