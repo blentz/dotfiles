@@ -65,6 +65,7 @@ alias ll='ls -l'
 alias la='ls -la'
 export LSCOLORS='GxfxcxdxcxegedaBagabad'
 alias grep="${HOMEBREW_PREFIX}/bin/ag"
+alias less="less -R"
 
 alias docker-rmi-untagged='docker rmi $(docker images -q -f "dangling=true")'
 alias docker-rm-exited='docker rm -v $(docker ps -qa --no-trunc --filter "status=exited")'
@@ -107,6 +108,7 @@ function rebaseupstream () {
 function update_env() {
     source $1 && export $(grep "^[^#;]" $1 | cut -d= -f1)
 }
+
 function tfmodup() {
     if [ -z $1 ]; then
         echo "usage: tfmodup modname 1.2.3"
@@ -114,14 +116,16 @@ function tfmodup() {
     fi
     grep -rl $1 | xargs gsed -i 's/'"${1}"'.git?ref.*/'"${1}"'.git?ref=v'"${2}"'\"/'
 }
+
 function gitbr() {
     git checkout -b $1 origin/$(git branch --list master main develop | tr -d '* ')
 }
+
 function diff-tfstate() {
     if [ -d $1 ] && [ -d $2 ]; then
-        diff -r -x .git -x .terraform -x .terraform.lock.hcl -x README.md --color=auto $1 $2
+        diff -r -x .git -x .terraform -x .terraform.lock.hcl -x README.md --color=always $1 $2
     else
-        usage: diff-tfstate dir1 dir2
+        echo "usage: diff-tfstate dir1 dir2"
     fi
 }
 
@@ -135,6 +139,10 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
 export DOCKER_CONFIG="${HOME}/.docker"
 export HELM_REGISTRY_CONFIG="${DOCKER_CONFIG}/config.json"
 export TF_LOG=WARN
+
+# used by https://github.com/ankitpokhrel/jira-cli
+export JIRA_API_TOKEN=$(cat ~/jira_pat.txt)
+export JIRA_AUTH_TYPE=bearer
 
 alias mvim="open -a MacVim.app $1"
 alias sort-launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"

@@ -30,9 +30,13 @@
     untracked = cyan
 
 [core]
-    pager = less -FRSX
+    pager = delta
     whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-    editor = vim
+    editor = nvim
+    excludesfile = ~/.gitignore
+
+[interactive]
+    diffFilter = delta --color-only
 
 [alias]
     add = add --all
@@ -54,6 +58,7 @@
     autosetuprebase = always
 
 [merge]
+    conflictstyle = zdiff3
     ;tool = /usr/local/bin/meld
 
 [receive]
@@ -61,6 +66,9 @@
 
 [push]
     default = matching
+
+[pull]
+    rebase = true
 
 [http]
     sslVerify = false
@@ -76,20 +84,25 @@
 
 [commit]
     gpgsign = true
+    verbose = true
+
+[rerere]
+    enabled = true
 
 [gpg]
     program = /opt/homebrew/bin/gpg
-[pull]
-    rebase = true
+
 [init]
     defaultBranch = main
     # templateDir = /Users/brett.lentz/.git-template
 
 [status]
-	submoduleSummary = true
+    submoduleSummary = true
+
 [diff]
     submodule = log
     tool = difft
+    algorithm = histogram
 
 [difftool]
     prompt = false
@@ -103,6 +116,15 @@
 
 # [url "ssh://git@github.com/"]
 #     insteadOf = https://github.com/
+
+[transfer]
+    fsckobjects = true
+
+[fetch]
+    fsckobjects = true
+
+[receive]
+    fsckobjects = true
 
 [url "https://github.com/"]
     insteadOf = ssh://git@github.com/

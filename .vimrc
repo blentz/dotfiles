@@ -22,9 +22,13 @@ else
     :colorscheme southernlights
 endif
 
-" if has('gui_running')
-"     set guifont=Whatever Patched Font
-" endif
+if !has('nvim')
+    set ttymouse=xterm2
+endif
+
+if exists("g:gui_vimr")
+  " VimR specific settings
+endif
 
 " show line and column numbers
 set ruler
@@ -163,14 +167,11 @@ let g:ycm_key_list_previous_completion = ['<Up>']
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
 " NERDTree
-nmap <Leader>nt :NERDTreeToggle<CR>
-let NERDTreeShowHidden=1
+"nnoremap <silent><Leader>nt :NERDTreeToggle<CR>
+"let NERDTreeShowHidden=1
 
 " ignore certain files
-let NERDTreeIgnore = ['__pycache__', '\.sw[po]$']
-
-" autoopen NerdTree when no file is specified
-autocmd vimenter * if !argc() | NERDTree | endif
+"let NERDTreeIgnore = ['__pycache__', '\.sw[po]$']
 
 " Tagbar
 nmap <Leader>tb :TagbarToggle<CR>
@@ -286,9 +287,9 @@ if exists(':Plugin')
     Plugin 'tpope/vim-fugitive'
     Plugin 'airblade/vim-gitgutter'
     Plugin 'vim-syntastic/syntastic'
-    Plugin 'scrooloose/nerdtree'
-    Plugin 'jistr/vim-nerdtree-tabs'
-    Plugin 'Xuyuanp/nerdtree-git-plugin'
+    "Plugin 'scrooloose/nerdtree'
+    "Plugin 'jistr/vim-nerdtree-tabs'
+    "Plugin 'Xuyuanp/nerdtree-git-plugin'
     Plugin 'flazz/vim-colorschemes'
     Plugin 'majutsushi/tagbar'
     Plugin 'xolox/vim-misc'
@@ -307,7 +308,7 @@ if exists(':Plugin')
     Plugin 'tomtom/tlib_vim'
     Plugin 'garbas/vim-snipmate'
     Plugin 'honza/vim-snippets'
-    Plugin 'fatih/vim-go'
+    " Plugin 'fatih/vim-go'
     Plugin 'jiangmiao/auto-pairs'
 endif
 " All of your Plugins must be added before the following line
