@@ -1,4 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =2
+let g:netrw_dirhistcnt =4
+let g:netrw_dirhist_4='/Users/Brett.Lentz/git/ais-images/os-shell'
+let g:netrw_dirhist_3='/Users/Brett.Lentz/git/terraform/tf-gcp-organization/modules/analog_com'
 let g:netrw_dirhist_2='/Users/Brett.Lentz/git/centralai-python-app-template/helm/charts'
 let g:netrw_dirhist_1='/Users/Brett.Lentz/git/terraform/tf-gitlab/modules/aisolutions'

@@ -21,7 +21,7 @@
 [color "diff"]
     meta = yellow bold
     frag = magenta bold
-    old = red bold
+    old = brightred bold
     new = green bold
 
 [color "status"]
@@ -37,6 +37,9 @@
 
 [interactive]
     diffFilter = delta --color-only
+
+[delta]
+    syntax-theme = DarkNeon
 
 [alias]
     add = add --all

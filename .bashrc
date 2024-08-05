@@ -3,7 +3,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 export HOMEBREW_PREFIX="/opt/homebrew"
 
 function source_file() {
-    if [ -f $1 ]; then
+    if [ -f $1 ] && [ -r $1 ]; then
         source $1
     fi
 }
@@ -13,14 +13,11 @@ source_file "${HOME}/.gitlab-completion.sh"
 source_file "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
 
 if type brew &>/dev/null; then
-  HOMEBREW_PREFIX="$(brew --prefix)"
-  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
-    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-  else
-    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
-      [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+    HOMEBREW_PREFIX="$(brew --prefix)"
+    source_file "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+    for COMPLETION in $(\ls -1 ${HOMEBREW_PREFIX}/etc/bash_completion.d | \grep -E '\.(ba)?sh'); do
+        source_file "$COMPLETION"
     done
-  fi
 fi
 
 # install fzf completions if needed
@@ -133,6 +130,8 @@ export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/opt/postgresql@15/bin:/us
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+eval "$(rbenv init -)"
+
 export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
 

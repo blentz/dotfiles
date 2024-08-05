@@ -1,0 +1,135 @@
+{
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "cloudcode.project": "analog-ais-shared-infra-dev",
+    "codeium.enableSearch": true,
+    "files.autoSave": "off",
+    "editor.minimap.enabled": false,
+    "git.autofetch": true,
+    "http.proxySupport": "on",
+    "gitlab.aiAssistedCodeSuggestions.enabled": false,
+    "gitlab.duoChat.enabled": false,
+    "gitlens.autolinks": [],
+    "gitlens.codeLens.authors.enabled": false,
+    "gitlens.codeLens.recentChange.enabled": false,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.plusFeatures.enabled": false,
+    "redhat.telemetry.enabled": false,
+    "refactai.infurl": "http://127.0.0.1:8008",
+    "[terraform]": {
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "hashicorp.terraform",
+      "editor.tabSize": 2,
+    },
+    "[terraform-vars]": {
+      "editor.tabSize": 2
+    },
+    "privy.model": "codellama:instruct",
+    "workbench.startupEditor": "none",
+    "workbench.editor.editorActionsLocation": "hidden",
+
+    // from: https://hoitz.medium.com/improved-vim-setup-in-visual-studio-code-bc579501b80c
+    "vim.hlsearch": true,
+    "vim.leader": ",",
+    "vim.insertModeKeyBindings": [{
+        "before": ["j", "j"],
+        "after": ["<Esc>"]
+    }],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+          "before": ["<space>"],
+          "commands": ["workbench.action.files.save"]
+        },
+        {
+          "before": ["<leader>", "<space>"],
+          "commands": [":nohl"]
+        },
+        {
+          "before": ["<leader>", "w"],
+          "commands": ["workbench.action.splitEditor"]
+        },
+        {
+          "before": ["<leader>", "t"],
+          "commands": ["workbench.action.toggleSidebarVisibility"]
+        },
+        {
+            "before": ["<leader>", "c"],
+            "commands": [
+                "editor.action.commentLine",
+            ],
+        },
+        {
+            "before": ["<leader>", "f"],
+            "commands": [
+                "revealInExplorer",
+            ],
+        },
+        {
+            "before": ["<leader>", "r", "e"],
+            "commands": [
+                "editor.action.rename"
+            ]
+        },
+        {
+            "before": ["<leader>", "r", "f"],
+            "commands": [
+                "fileutils.renameFile"
+            ]
+        },
+        {
+            "before": ["<leader>", "o", "g"],
+            "commands": [
+                "workbench.action.showAllSymbols"
+            ]
+        },
+        {
+            "before": ["<leader>", "o", "o"],
+            "commands": [
+                "workbench.action.showEditorsInActiveGroup"
+            ]
+        },
+        {
+            "before": ["<leader>", "o", "p"],
+            "commands": [
+                "workbench.action.quickOpen"
+            ]
+        }
+    ],
+
+    "vim.visualModeKeyBindings": [
+        {
+            "before": ["<leader>", "c"],
+            "commands": [
+                "editor.action.commentLine",
+                "extension.vim_escape"
+            ],
+        }
+    ],
+    "vs-kubernetes": {
+        "vs-kubernetes.crd-code-completion": "enabled"
+    },
+    "sops.configPath": "./.sops.yaml",
+    "terminal.external.osxExec": "/opt/homebrew/bin/kitty",
+    "terminal.external.linuxExec": "kitty",
+    "terminal.external.windowsExec": "C:\\Windows\\System32\\powershell.exe",
+    "terminal.integrated.allowChords": false,
+    "terminal.integrated.allowedLinkSchemes": [
+        "file",
+        "http",
+        "https"
+    ],
+    "terminal.integrated.profiles.osx": {
+        "kitty": {
+            "path": "/opt/homebrew/bin/kitty"
+          } 
+    },
+    "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.macOptionIsMeta": true,
+    "terminal.integrated.persistentSessionScrollback": 1000,
+    "terminal.integrated.shellIntegration.history": 10000,
+    "terminal.integrated.tabStopWidth": 4,
+    "terminal.integrated.defaultProfile.osx": "kitty",
+    "window.systemColorTheme": "dark",
+}
