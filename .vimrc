@@ -287,9 +287,9 @@ if exists(':Plugin')
     Plugin 'tpope/vim-fugitive'
     Plugin 'airblade/vim-gitgutter'
     Plugin 'vim-syntastic/syntastic'
-    "Plugin 'scrooloose/nerdtree'
-    "Plugin 'jistr/vim-nerdtree-tabs'
-    "Plugin 'Xuyuanp/nerdtree-git-plugin'
+    Plugin 'scrooloose/nerdtree'
+    Plugin 'jistr/vim-nerdtree-tabs'
+    Plugin 'Xuyuanp/nerdtree-git-plugin'
     Plugin 'flazz/vim-colorschemes'
     Plugin 'majutsushi/tagbar'
     Plugin 'xolox/vim-misc'
@@ -308,7 +308,7 @@ if exists(':Plugin')
     Plugin 'tomtom/tlib_vim'
     Plugin 'garbas/vim-snipmate'
     Plugin 'honza/vim-snippets'
-    " Plugin 'fatih/vim-go'
+    Plugin 'fatih/vim-go'
     Plugin 'jiangmiao/auto-pairs'
 endif
 " All of your Plugins must be added before the following line

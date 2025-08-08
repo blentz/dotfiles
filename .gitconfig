@@ -2,8 +2,8 @@
     name = Brett Lentz
     # email = blentz@users.noreply.github.com
     # email = brett.lentz@gmail.com
-    email = brett.lentz@analog.com
-    signingkey = 08843693B9A82FBD
+    email = brett.lentz@usehatchapp.com
+    signingkey = FD04D6D695EAB0BD45F2B9F5FE4398A2338EF8C8
 
 [color]
     diff = auto

@@ -8,10 +8,6 @@ function source_file() {
     fi
 }
 
-# source_file "${HOME}/bin/oc_completion.sh"
-source_file "${HOME}/.gitlab-completion.sh"
-source_file "${HOMEBREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.bash.inc"
-
 if type brew &>/dev/null; then
     HOMEBREW_PREFIX="$(brew --prefix)"
     source_file "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
@@ -138,10 +134,6 @@ export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
 export DOCKER_CONFIG="${HOME}/.docker"
 export HELM_REGISTRY_CONFIG="${DOCKER_CONFIG}/config.json"
 export TF_LOG=WARN
-
-# used by https://github.com/ankitpokhrel/jira-cli
-export JIRA_API_TOKEN=$(cat ~/jira_pat.txt)
-export JIRA_AUTH_TYPE=bearer
 
 alias mvim="open -a MacVim.app $1"
 alias sort-launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
