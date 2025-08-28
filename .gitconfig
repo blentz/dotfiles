@@ -97,6 +97,7 @@
 
 [init]
     defaultBranch = main
+	templateDir = /Users/blentz/.git-template
     # templateDir = /Users/brett.lentz/.git-template
 
 [status]

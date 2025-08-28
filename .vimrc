@@ -160,18 +160,12 @@ let g:syntastic_python_python_exec = '/usr/bin/env python3'
 highlight SyntasticWarning guibg=yellow guifg=black ctermfg=016 ctermbg=226
 highlight SyntasticError   guibg=red guifg=white ctermfg=255 ctermbg=160
 
-" YouCompleteMe options
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-"let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-
 " NERDTree
-"nnoremap <silent><Leader>nt :NERDTreeToggle<CR>
-"let NERDTreeShowHidden=1
+nnoremap <silent><Leader>nt :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
 
 " ignore certain files
-"let NERDTreeIgnore = ['__pycache__', '\.sw[po]$']
+let NERDTreeIgnore = ['__pycache__', '\.sw[po]$']
 
 " Tagbar
 nmap <Leader>tb :TagbarToggle<CR>
@@ -281,7 +275,6 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 if exists(':Plugin')
-    Plugin 'Valloric/YouCompleteMe'
     Plugin 'plasticboy/vim-markdown'
     Plugin 'godlygeek/tabular'
     Plugin 'tpope/vim-fugitive'
