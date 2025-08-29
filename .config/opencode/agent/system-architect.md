@@ -1,7 +1,7 @@
 ---
 description: Creates architectural plans from project plans.
 mode: subagent
-model: openai/gpt-5
+model: claude-opus-4-1-20250805
 temperature: 0.1
 tools:
   write: true

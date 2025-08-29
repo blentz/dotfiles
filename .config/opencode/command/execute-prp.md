@@ -1,3 +1,7 @@
+---
+description: Execute Product Requirements Prompt
+agent: developer
+---
 # Execute BASE PRP
 
 Implement a feature using using the PRP file.

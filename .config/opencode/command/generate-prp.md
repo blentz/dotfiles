@@ -1,3 +1,8 @@
+---
+description: Create a Product Requirements Prompt
+agent: project-manager
+---
+
 # Create Product Requirements Prompt (PRP)
 
 ## Feature file: $ARGUMENTS
