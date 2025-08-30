@@ -1,7 +1,7 @@
 ---
 description: Creates architectural plans from project plans.
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: anthropic/claude-opus-4-1-20250805
 temperature: 0.1
 tools:
   write: true

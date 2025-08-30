@@ -1,7 +1,7 @@
 ---
 description: Implements code
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: anthropic/claude-sonnet-4-20250514
 temperature: 0.1
 tools:
   write: true
