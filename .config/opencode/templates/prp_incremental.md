@@ -13,47 +13,103 @@ Template optimized for AI agents to implement features incrementally through con
 6. **Global rules**: Follow all rules in CLAUDE.md
 7. **Use Subagents**: Leverage the Task tool with appropriate subagent_type for complex operations
 
-## LOOP.md Creation Instructions
+## LOOP.md Generation Instructions
 
-Create a LOOP.md file that references this PRP and enforces iteration discipline:
+When using `generate-prp` with this template, TWO files will be created:
+1. The PRP document (this filled template)
+2. A LOOP.md file based on the template at: `.config/opencode/templates/LOOP.md`
 
-```markdown
-# Iteration Loop for [Feature Name]
+### LOOP.md Template Variables to Fill
 
-## Current Iteration
-Execute: templates/prp_incremental.md
-Task ID: [Read from .state/current_task.txt]
-Iteration: [Read from .state/iteration_count.txt]
+When generating LOOP.md, populate these placeholders based on your project:
 
-## Iteration Rules
-1. Complete ONLY the current task ID
-2. Run ALL validation for current task
-3. Update state files upon completion
-4. Identify next task for subsequent iteration
-5. Exit cleanly for next loop
+```yaml
+PROJECT_NAME: "[Your project/feature name]"
+STATUS_FILE_PATH: "docs/CURRENT_STATUS.md"  # Or your preferred location
+INITIAL_PHASE: "Phase 1: [Your first phase name]"
+INITIAL_SESSION_NAME: "[Your first session description]"
+INITIAL_NEXT_STEPS: |
+  - [First task]
+  - [Second task]
+  - [Third task]
+INITIAL_NOTES: "Starting implementation of [feature description]"
 
-## Anti-Oversimplification Guardrails
-- NO placeholder code (e.g., "pass", "TODO", "...")
-- NO untested code declarations
-- NO skipping validation steps
-- NO verbose success messages without test output
-- NO moving to next task without current task passing ALL tests
-- NO simplifying complex logic without maintaining functionality
-- NO mocking tests to pass - fix the actual code
+# Optional baseline examples (leave blank if not applicable)
+BASELINE_EXAMPLES: " (GPT-4, Claude, human)"  # Or empty string
 
-## Required Evidence
-Before marking any task complete, provide:
-1. Actual test execution output (not predicted)
-2. Linting/type checking results
-3. Integration test results if applicable
-4. Specific error resolution if encountered
+IMPLEMENTATION_PRIORITIES: |
+  1. [Your priority 1]
+  2. [Your priority 2]
+  3. [Your priority 3]
+  4. [Your priority 4]
+  5. [Your priority 5]
 
-## State Management
-- Read: .state/current_task.txt
-- Update: .state/completed_tasks.txt
-- Increment: .state/iteration_count.txt
-- Log: .state/iteration_[N].log
+CODE_STRUCTURE: |
+  src/
+  ├── [your structure here]
+  └── ...
+
+CODE_LANGUAGE: "typescript"  # or python, javascript, etc.
+
+CODE_PATTERNS: |
+  // Your language-specific patterns
+  // Include proper typing, error handling, etc.
+
+VALIDATION_REQUIREMENTS: |
+  1. [Your validation step 1]
+  2. [Your validation step 2]
+  3. [Your validation step 3]
+  4. [Your validation step 4]
+  5. [Your validation step 5]
+
+# Example values for status updates
+EXAMPLE_PHASE: "Phase 1: [Example phase]"
+EXAMPLE_SESSION: "Session 2: [Example session]"
+EXAMPLE_COMPLETED: |
+  - Session 1: [What was completed]
+    - [Specific item 1]
+    - [Specific item 2]
+EXAMPLE_NEXT_STEPS: |
+  - [Next task 1]
+  - [Next task 2]
+  - [Next task 3]
+EXAMPLE_BLOCKERS: "None"  # Or specific blockers
+EXAMPLE_CONTEXT_USAGE: "Approximately 45% - stopping work to preserve quality"
+EXAMPLE_NOTES: |
+  - [Note about validation]
+  - [Note about implementation]
+  - [Note about next steps]
+
+COMMIT_PREFIX: "feat(component)"  # Or fix, docs, test, etc.
+COMMIT_SUFFIX: "Part of [project name] implementation"
+
+PHASES_OVERVIEW: |
+  ### Phase 1: [Phase Name] (Sessions 1-N)
+  - [Goal 1]
+  - [Goal 2]
+
+  ### Phase 2: [Phase Name] (Sessions N-M)
+  - [Goal 1]
+  - [Goal 2]
+
+  ### Phase 3: [Phase Name] (Sessions M-P)
+  - [Goal 1]
+  - [Goal 2]
+
+ADDITIONAL_REMINDERS: |
+  - [Project-specific reminder 1]
+  - [Project-specific reminder 2]
+  - Use established libraries, don't reinvent the wheel
 ```
+
+### Generated LOOP.md Usage
+
+The generated LOOP.md file will:
+- Reference this PRP document for detailed requirements
+- Provide session-by-session execution instructions
+- Track progress in the specified status file
+- Enforce iteration discipline with anti-oversimplification guardrails
+- Guide incremental atomic progress through the implementation
 
 ---
 
