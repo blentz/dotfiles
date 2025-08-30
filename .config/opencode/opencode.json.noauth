@@ -1,4 +1,24 @@
 {
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "codellama:latest": {
+          "tools": true
+        },
+        "devstral:latest": {
+          "tools": true
+        },
+        "gpt-oss:20b": {
+          "tools": true
+        }
+      }
+    }
+  },
   "mcp": {
     "podman": {
       "type": "local",
@@ -66,5 +86,8 @@
       }
     }
   },
+  "instructions": [
+    "AGENTS.md"
+  ],
   "$schema": "https://opencode.ai/config.json"
 }

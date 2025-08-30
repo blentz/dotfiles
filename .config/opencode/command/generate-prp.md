@@ -1,15 +1,32 @@
 ---
 description: Create a Product Requirements Prompt
-agent: project-manager
 ---
 
 # Create Product Requirements Prompt (PRP)
+
+## IMPORTANT: Use the Project Manager Subagent
+
+**You MUST use the Task tool to launch the project-manager subagent for this command:**
+```
+Task(
+  description="Generate PRP",
+  prompt="<include the full contents of this command>",
+  subagent_type="project-manager"
+)
+```
 
 ## Feature file: $ARGUMENTS
 
 Generate a complete PRP for general feature implementation with thorough research. Ensure context is passed to the AI agent to enable self-validation and iterative refinement. Read the feature file first to understand what needs to be created, how the examples provided help, and any other considerations.
 
 The AI agent only gets the context you are appending to the PRP and training data. Assume the AI agent has access to the codebase and the same knowledge cutoff as you, so its important that your research findings are included or referenced in the PRP. The Agent has Websearch capabilities, so pass urls to documentation and examples. The AI agent has access to the @sentient-agi-reasoning MCP server for enhanced reasoning capabilities and should be encouraged to use it for all reasoning tasks.
+
+## Using Subagents for Research
+
+For complex research tasks, use appropriate subagents:
+- Use `subagent_type="general"` for broad research and exploration
+- Use `subagent_type="requirements-analyst"` for requirement analysis
+- Use `subagent_type="system-architect"` for architectural planning
 
 ## Research Process
 
@@ -31,7 +48,17 @@ The AI agent only gets the context you are appending to the PRP and training dat
 
 ## PRP Generation
 
-Using `~/.config/opencode/templates/prp_base.md` as template:
+### Template Selection (EXPLICIT RULES)
+
+templates_dir: `~/.config/opencode/templates/`
+
+**SELECT TEMPLATE BASED ON USER INPUT:**
+1. IF user input contains "incremental" OR "in a loop" OR "continuous" OR "iterative":
+   - USE: `{templates_dir}/prp_incremental.md`
+2. ELSE (default case):
+   - USE: `{templates_dir}/prp_base.md`
+
+**IMPORTANT:** Check the exact user input in $ARGUMENTS to determine template selection.
 
 ### Critical Context to Include and pass to the AI agent as part of the PRP
 - **Documentation**: URLs with specific sections

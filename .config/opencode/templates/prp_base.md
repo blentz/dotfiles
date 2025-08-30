@@ -11,6 +11,7 @@ Template optimized for AI agents to implement features with sufficient context a
 4. **Information Dense**: Use keywords and patterns from the codebase
 5. **Progressive Success**: Start simple, validate, then enhance
 6. **Global rules**: Be sure to follow all rules in CLAUDE.md
+7. **Use Subagents**: Leverage the Task tool with appropriate subagent_type for complex operations
 
 ---
 
@@ -94,10 +95,16 @@ CREATE src/new_feature.py:
   - MODIFY class name and core logic
   - KEEP error handling pattern identical
 
-...(...)
+# For complex tasks, specify subagent usage:
+Task N (Complex):
+  USE_SUBAGENT: "system-architect"
+  DESCRIPTION: "Design the database schema for new feature"
 
-Task N:
-...
+Task N+1 (Testing):
+  USE_SUBAGENT: "qa-engineer"
+  DESCRIPTION: "Create comprehensive test suite"
+
+...(...)
 
 ```
 

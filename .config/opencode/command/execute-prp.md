@@ -1,10 +1,20 @@
 ---
 description: Execute Product Requirements Prompt
-agent: developer
 ---
-# Execute BASE PRP
+# Execute PRP
 
-Implement a feature using using the PRP file.
+## IMPORTANT: Use the Developer Subagent
+
+**You MUST use the Task tool to launch the developer subagent for this command:**
+```
+Task(
+  description="Execute PRP",
+  prompt="<include the full contents of this command and the PRP file>",
+  subagent_type="developer"
+)
+```
+
+Implement a feature using the PRP file.
 
 ## PRP File: $ARGUMENTS
 
@@ -27,12 +37,17 @@ Implement a feature using using the PRP file.
 3. **Execute the plan**
    - Execute the PRP
    - Implement all the code
+   - For complex subtasks, consider using specialized subagents:
+     - `subagent_type="maintenance-support"` for bug fixes
+     - `subagent_type="devops-engineer"` for CI/CD or infrastructure
+     - `subagent_type="qa-engineer"` for comprehensive testing
 
 4. **Validate**
    - Run each validation command
    - Fix any failures
    - Re-run until all pass with 0 errors, 0 warnings, 0 skipped
    - Carefully check logs and command outputs for errors or unexpected behavior
+   - Consider using `subagent_type="qa-engineer"` for thorough validation
 
 5. **Complete**
    - Ensure all checklist items done
