@@ -8,7 +8,7 @@
 
 ## Session Structure
 
-### 0. PREPARE: Scan the previous session's work for bullshit.
+### 0. PREPARE: Scan the previous session's work for bullshit. REQUIRED FOR EVERY LOOP.
 
 Use the bullshit-detector sub-agent to assess whether the previous itration did usable work. Do not move to a new phase of the project until the current phase is correctly implemented.
 
@@ -60,20 +60,25 @@ Based on the current session indicated in {{STATUS_FILE_PATH}}, execute the appr
 5. **OPTIMIZE** - Use @task with maintenance-support to optimize
 
 #### Anti-Oversimplification Requirements
+Permission to simplify problems is **DENIED**. The user must give you explicit approval before you are allowed to avoid complex problems.
 
-**CRITICAL**: You are FORBIDDEN from implementing "simple" versions without explicit user direction.
-**CRITICAL**: You are FORBIDDEN from creating "demonstration" code without explicit user direction.
-**CRITICAL**: You are FORBIDDEN from using an "alternative approach" without explicit user direction.
-**CRITICAL**: You are FORBIDDEN from changing your goals without explicit user direction.
-**CRITICAL**: You are FORBIDDEN from using any kind of random function without explicit user direction.
+**CRITICAL**: You do not have permission to:
+- implement "simple" solutions
+- create "demo" or "demonstration" code
+- create "simple" tests or validations
+- use "realistic" data. Realistic is fake, not real.
+- create "mock" implmentations. Mocking is only valid in unit tests.
+- using alternative approaches not in the PRP
+- change goals or redefine success. The only valid definition of success is the one the user gave.
+- using random functions of any kind. Using Math.random() is ALWAYS a failure. Every time you use Math.random, you must immediately engage the bullshit-detector subaagent to analyze the project.
 
-**CRITICAL**: You are ALLOWED to partially implement solutions that can be completed in a future iteration loop.  Incomplete work is always better than incorrect.
+Remember: Partially implemented solutions that can be iterated upon in a future iteration loop are ALLOWED. Incomplete high complexity work is always better than arriving at a wrong answer quickly. Fast solutions are always failures. Take as many iterations as neceassary to complete the task correctly.
 
-- If a problem is too complex:
-    1. Immediately stop implementing and return to planning.
-    2. Break down the complex problem into smaller tasks.
-    3. Recursively plan and break complex problems down until tasks are simple enough for you to solve correctly within the context window.
-    4. Use the {{STATUS_FILE_PATH}} to document your task breakdowns and progress at implementation.
+### When a problem is too complex ALWAYS do this instead of simplifying:
+  1. Immediately stop implementing and return to planning.
+  2. Break down the complex problem into smaller tasks.
+  3. Recursively plan and break complex problems down until tasks are simple enough for you to solve correctly within the context window.
+  4. Use the docs/PHOENIX_STATUS.md to document your task breakdowns and progress at implementation.
 
 #### Implementation Priorities
 
