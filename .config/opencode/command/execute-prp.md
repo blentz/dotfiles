@@ -49,13 +49,37 @@ Implement a feature using the PRP file.
    - Carefully check logs and command outputs for errors or unexpected behavior
    - Consider using `subagent_type="qa-engineer"` for thorough validation
 
-5. **Complete**
+5. **CRITICAL: Bullshit Detector Review**
+
+   **MANDATORY BEFORE MARKING COMPLETE**
+
+   Submit your implementation for bullshit-detector review:
+   ```
+   Task(
+     description="Review implementation",
+     prompt="Review the implementation for bullshit, AI slop, and production readiness. Check all code, tests, and documentation. Reject if not production-ready.",
+     subagent_type="bullshit-detector"
+   )
+   ```
+
+   The bullshit-detector will verify:
+   - No placeholder or toy code
+   - Proper error handling implemented
+   - Real tests that actually test functionality
+   - No AI-generated verbose garbage
+   - Production-ready code quality
+   - No fabricated test results
+
+   **If rejected:** Fix ALL issues before proceeding
+
+6. **Complete**
    - Ensure all checklist items done
+   - Ensure bullshit-detector approval received
    - Run final validation suite
    - Report completion status
    - Read the PRP again to ensure you have implemented everything
 
-6. **Reference the PRP**
+7. **Reference the PRP**
    - You can always reference the PRP again if needed
 
-Note: If validation fails, use error patterns in PRP to fix and retry.
+Note: If validation fails or bullshit-detector rejects, fix issues and retry. NO EXCUSES.

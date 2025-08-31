@@ -57,13 +57,19 @@ Based on the current session indicated in {{STATUS_FILE_PATH}}, execute the appr
 
 #### Anti-Oversimplification Requirements
 
-**CRITICAL**: Do NOT implement binary on/off controls. Instead:
+**CRITICAL**: You are FORBIDDEN from implementing "simple" versions without explicit user direction.
+**CRITICAL**: You are FORBIDDEN from creating "demonstration" code without explicit user direction.
+**CRITICAL**: You are FORBIDDEN from using an "alternative approach" without explicit user direction.
+**CRITICAL**: You are FORBIDDEN from changing your goals without explicit user direction.
+**CRITICAL**: You are FORBIDDEN from using any kind of random function without explicit user direction.
 
-- Use continuous intensity scales (0.0 to 1.0)
-- Preserve system coherence above 0.8
-- Test enhancement DELTAS not absolute states
-- Compare against realistic baselines{{BASELINE_EXAMPLES}}
-- Implement layered enhancements that ADD to baseline
+**CRITICAL**: You are ALLOWED to partially implement solutions that can be completed in a future iteration loop.  Incomplete work is always better than incorrect.
+
+- If a problem is too complex:
+    1. Immediately stop implementing and return to planning.
+    2. Break down the complex problem into smaller tasks.
+    3. Recursively plan and break complex problems down until tasks are simple enough for you to solve correctly within the context window.
+    4. Use the {{STATUS_FILE_PATH}} to document your task breakdowns and progress at implementation.
 
 #### Implementation Priorities
 

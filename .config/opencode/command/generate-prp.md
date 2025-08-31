@@ -98,4 +98,33 @@ Save as: `docs/PRP_{feature-name}.md`
 
 Score the PRP on a scale of 1-10 (confidence level to succeed in one-pass implementation using an AI coding assistant)
 
-Remember: The goal is one-pass implementation success through comprehensive context.
+## CRITICAL: Bullshit Detector Review
+
+**MANDATORY STEP - DO NOT SKIP**
+
+After completing the PRP, you MUST submit it for bullshit-detector review:
+
+```
+Task(
+  description="Review PRP for bullshit",
+  prompt="Review the following PRP and identify any bullshit, oversimplifications, or AI-generated slop. Block if not production-ready: [Include full PRP content]",
+  subagent_type="bullshit-detector"
+)
+```
+
+The bullshit-detector will check for:
+- Vague or meaningless requirements
+- Over-engineered or toy example solutions
+- Missing critical implementation details
+- Unrealistic validation criteria
+- AI-generated generic content
+- Lack of error handling specifications
+- Cherry-picked or fabricated metrics
+
+**If the bullshit-detector rejects the PRP:**
+1. Address ALL identified issues
+2. Rewrite problematic sections
+3. Submit for re-review
+4. DO NOT proceed until approved
+
+Remember: The goal is one-pass implementation success through comprehensive context - no bullshit allowed.

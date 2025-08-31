@@ -331,6 +331,12 @@ def complex_function():
 # ❌ WRONG: Untested success claim
 print("Feature implemented successfully!")
 
+# ❌ WRONG: Untested success claim
+console.log("Test passed successfully!")
+
+# ❌ WRONG: Untested success claim
+echo "Validated successfully!")
+
 # ✅ RIGHT: Evidence-based completion
 # Show actual test output:
 # tests/test_feature.py::test_basic PASSED
@@ -340,6 +346,16 @@ print("Feature implemented successfully!")
 
 # ✅ RIGHT: Always run validation
 subprocess.run(["pytest", "tests/"], check=True)
+
+# ❌ WRONG: Faking results with random()
+test_data = hardcoded_constant * Math.random()
+
+# ✅ RIGHT: Always use real data from remote APIs
+test_data = remote_api_call()
+
+# ✅ RIGHT: Always use real data from databases.
+test_data = fetch_data_from_database()
+
 ```
 
 ### Oversimplification Triggers
@@ -348,6 +364,9 @@ subprocess.run(["pytest", "tests/"], check=True)
 - Hardcoding values that should be configurable
 - Removing functionality to "simplify"
 - Creating mock objects instead of real implementations
+- Using random() instead of real data
+- Doing anything "for now"
+- Changing goals to something the user did not explicitly request.
 
 ## Final Validation Checklist (Per Iteration)
 - [ ] Current task test passes: `pytest tests/test_[task_id].py`
@@ -357,6 +376,8 @@ subprocess.run(["pytest", "tests/"], check=True)
 - [ ] State files updated: `.state/` reflects progress
 - [ ] No placeholder code remains
 - [ ] No untested code paths
+- [ ] No randomized fake data
+- [ ] No hardcoded fake data
 
 ## Emergency Stop Conditions
 If ANY of these occur, STOP and ask for user intervention:
