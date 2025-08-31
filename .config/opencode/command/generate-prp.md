@@ -50,11 +50,12 @@ For complex research tasks, use appropriate subagents:
 
 ### Template Selection (EXPLICIT RULES)
 
-templates_dir: `~/.config/opencode/templates/`
+templates_dir: `{PROJECT_DIR}/.opencode/templates/`
 
 **SELECT TEMPLATE BASED ON USER INPUT:**
 1. IF user input contains "incremental" OR "in a loop" OR "continuous" OR "iterative":
    - USE: `{templates_dir}/prp_incremental.md`
+   - USE: `{templates_dir}/LOOP.md`
 2. ELSE (default case):
    - USE: `{templates_dir}/prp_base.md`
 

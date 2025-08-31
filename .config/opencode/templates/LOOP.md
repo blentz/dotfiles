@@ -8,6 +8,10 @@
 
 ## Session Structure
 
+### 0. PREPARE: Scan the previous session's work for bullshit.
+
+Use the bullshit-detector sub-agent to assess whether the previous itration did usable work. Do not move to a new phase of the project until the current phase is correctly implemented.
+
 ### 1. START: Understand Current State
 
 First, check the git history and read the current status:

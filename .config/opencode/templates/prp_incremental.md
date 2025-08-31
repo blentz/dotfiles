@@ -307,6 +307,7 @@ PASS:
   - No import errors
   - No type errors
   - State files updated
+  - No violations of project requirements
 
 FAIL:
   - Fix errors in current iteration
