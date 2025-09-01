@@ -1,5 +1,11 @@
 # Iterative Implementation Loop Instructions for {{PROJECT_NAME}}
 
+## READ-ONLY LOOP.md
+This file is READ-ONLY. DO NOT MODIFY LOOP.md.
+
+## Core Project Files (READ FIRST EVERY LOOP)
+- {{PRP_document}}
+
 ## Context Management Rules
 
 - **STOP WORKING at 50% context usage** to preserve quality
@@ -14,10 +20,11 @@ Use the bullshit-detector sub-agent to assess whether the previous itration did 
 
 ### 1. START: Understand Current State
 
-First, check the git history and read the current status:
+First, read the core project files, then check the git history and read the current status:
 
 ```bash
 git log --oneline -5
+git log --stat -p HEAD
 ```
 
 Then read the current implementation status:
@@ -66,6 +73,7 @@ Permission to simplify problems is **DENIED**. The user must give you explicit a
 - implement "simple" solutions
 - create "demo" or "demonstration" code
 - create "simple" tests or validations
+- create new "clean" versions of anything. Two nonfunctional versions is two failures. Fix what's here, don't create double the mess.
 - use "realistic" data. Realistic is fake, not real.
 - create "mock" implmentations. Mocking is only valid in unit tests.
 - using alternative approaches not in the PRP
@@ -108,14 +116,15 @@ For each implementation:
 
 Before ending the session:
 
-1. Update {{STATUS_FILE_PATH}} with:
+1. Remove status from sessions older than the last 5 iterations unless the information is still relevant.
+2. Update {{STATUS_FILE_PATH}} with:
    - Work completed in this session
    - Current phase and session number
    - Next session's objectives
    - Any blockers or issues
    - Context usage estimate
 
-2. Example status update:
+3. Example status update:
 
 ```markdown
 # Implementation Status
@@ -149,7 +158,7 @@ Before ending the session:
 {{EXAMPLE_NOTES}}
 ```
 
-3. Commit your work:
+4. Commit your work:
 
 ```bash
 git add -A
