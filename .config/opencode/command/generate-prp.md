@@ -19,7 +19,7 @@ Task(
 
 Generate a complete PRP for general feature implementation with thorough research. Ensure context is passed to the AI agent to enable self-validation and iterative refinement. Read the feature file first to understand what needs to be created, how the examples provided help, and any other considerations.
 
-The AI agent only gets the context you are appending to the PRP and training data. Assume the AI agent has access to the codebase and the same knowledge cutoff as you, so its important that your research findings are included or referenced in the PRP. The Agent has Websearch capabilities, so pass urls to documentation and examples. The AI agent has access to the @sentient-agi-reasoning MCP server for enhanced reasoning capabilities and should be encouraged to use it for all reasoning tasks.
+The AI agent only gets the context you are appending to the PRP and training data. Assume the AI agent has access to the codebase and the same knowledge cutoff as you, so its important that your research findings are included or referenced in the PRP. The Agent has Websearch capabilities, so pass urls to documentation and examples. The AI agent has access to the mcp__sentient-agi-reasoning MCP server for enhanced reasoning capabilities and should be encouraged to use it for all reasoning tasks.
 
 ## Using Subagents for Research
 
@@ -50,7 +50,7 @@ For complex research tasks, use appropriate subagents:
 
 ### Template Selection (EXPLICIT RULES)
 
-templates_dir: `{PROJECT_DIR}/.opencode/templates/`
+templates_dir: `.opencode/templates/`
 
 **SELECT TEMPLATE BASED ON USER INPUT:**
 1. IF user input contains "incremental" OR "in a loop" OR "continuous" OR "iterative":
@@ -85,7 +85,7 @@ uv run pytest tests/ -v
 
 *** CRITICAL AFTER YOU ARE DONE RESEARCHING AND EXPLORING THE CODEBASE BEFORE YOU START WRITING THE PRP ***
 
-*** THINK ABOUT THE PRP AND PLAN YOUR APPROACH USING @sentient-agi-reasoning THEN START WRITING THE PRP ***
+*** THINK ABOUT THE PRP AND PLAN YOUR APPROACH USING mcp__sentient-agi-reasoning THEN START WRITING THE PRP ***
 
 ## Output
 Save as: `docs/PRP_{feature-name}.md`
@@ -128,4 +128,4 @@ The bullshit-detector will check for:
 3. Submit for re-review
 4. DO NOT proceed until approved
 
-Remember: The goal is one-pass implementation success through comprehensive context - no bullshit allowed.
+Remember: The goal is fully working implementation success through comprehensive context - no bullshit allowed.

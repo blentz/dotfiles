@@ -69,6 +69,17 @@ Template optimized for AI agents to implement features with sufficient context a
 
 ## Implementation Blueprint
 
+### CODE_STRUCTURE:
+```
+  .{PROJECT_ROOT}
+  ├── docs/  # Put all documentation here
+  ├── tests/ # Put all test or validation code here
+  ├── logs/  # Write all logs here
+  ├── src/  # ONLY application code in here
+  │   └── [your structure here]
+  └── ...
+```
+
 ### Data models and structure
 
 Create the core data models, we ensure type safety and consistency.

@@ -1,14 +1,11 @@
 # Iterative Implementation Loop Instructions for {{PROJECT_NAME}}
 
-## READ-ONLY LOOP.md
-This file is READ-ONLY. DO NOT MODIFY LOOP.md.
-
 ## Core Project Files (READ FIRST EVERY LOOP)
 - {{PRP_document}}
 
 ## Context Management Rules
 
-- **STOP WORKING at 50% context usage** to preserve quality
+- **STOP WORKING at 75% context usage** to preserve quality
 - Check context with periodic self-assessment
 - If approaching limit, finalize current work and update status
 
@@ -100,7 +97,7 @@ Remember: Partially implemented solutions that can be iterated upon in a future 
 
 ### 3. WORK: Implementation Guidelines
 
-Use @sentient-agi-reasoning to help plan the session work. Follow these patterns:
+Use mcp__sentient-agi-reasoning to help plan the session work. Follow these patterns:
 
 ```{{CODE_LANGUAGE}}
 {{CODE_PATTERNS}}
@@ -173,7 +170,7 @@ git commit -m "{{COMMIT_PREFIX}}: implement [specific feature] for session N
 
 ### 6. EXIT: Context Preservation
 
-If context usage exceeds 50%:
+If context usage exceeds 75%:
 
 1. Stop immediately
 2. Document stopping point in {{STATUS_FILE_PATH}}
@@ -188,6 +185,6 @@ If context usage exceeds 50%:
 ## Remember
 
 - This file is STATELESS - all state tracking happens in {{STATUS_FILE_PATH}}
-- Stop at 50% context to maintain quality
+- Stop at 75% context to maintain quality
 - {{ADDITIONAL_REMINDERS}}
 - Commit frequently with descriptive messages
