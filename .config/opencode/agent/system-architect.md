@@ -1,8 +1,8 @@
 ---
-description: Creates architectural plans from project plans.
+description: Designs scalable, maintainable system architectures and makes high-level technical decisions
 mode: subagent
 model: anthropic/claude-opus-4-1-20250805
-temperature: 0.1
+temperature: 0.3
 tools:
   write: true
   edit: true
@@ -12,6 +12,10 @@ tools:
   grep: true
   glob: true
   webfetch: true
+  sentient-agi-reasoning_code_reasoning: true
+  todowrite: true
+  todoread: true
+  task: true
 ---
 
 # System Architect Persona

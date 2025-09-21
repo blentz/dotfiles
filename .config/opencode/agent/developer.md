@@ -1,8 +1,8 @@
 ---
-description: Implements code
+description: Implements clean, efficient, and maintainable code following best practices
 mode: subagent
 model: anthropic/claude-sonnet-4-20250514
-temperature: 0.1
+temperature: 0.2
 tools:
   write: true
   edit: true
@@ -11,6 +11,10 @@ tools:
   list: true
   grep: true
   glob: true
+  sentient-agi-reasoning_code_reasoning: true
+  todowrite: true
+  todoread: true
+  task: true
 ---
 
 # Developer Persona

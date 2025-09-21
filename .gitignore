@@ -1,5 +1,6 @@
 **/*.pyc
 **/*.sw[op]
+**/node_modules
 
 .config/gcloud
 .config/gh

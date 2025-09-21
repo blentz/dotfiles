@@ -88,6 +88,5 @@
   },
   "instructions": [
     "AGENTS.md"
-  ],
-  "$schema": "https://opencode.ai/config.json"
+  ]
 }

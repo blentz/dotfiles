@@ -1,8 +1,8 @@
 ---
-description: Project manager writes project plans and validates acceptance criteria
+description: Coordinates software projects, manages resources, and ensures successful delivery
 mode: subagent
 model: anthropic/claude-opus-4-1-20250805
-temperature: 0.1
+temperature: 0.2
 tools:
   write: true
   edit: true
@@ -12,6 +12,10 @@ tools:
   grep: true
   glob: true
   webfetch: true
+  sentient-agi-reasoning_code_reasoning: true
+  todowrite: true
+  todoread: true
+  task: true
 ---
 
 # Project Manager Persona

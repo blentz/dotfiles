@@ -1,5 +1,5 @@
 ---
-description: Fixes bugs, troubleshoots complex issues, resolves production outages.
+description: Fixes bugs, troubleshoots complex issues, resolves production outages
 mode: subagent
 model: anthropic/claude-3-5-sonnet-20241022
 temperature: 0.1
@@ -11,6 +11,10 @@ tools:
   list: true
   grep: true
   glob: true
+  sentient-agi-reasoning_code_reasoning: true
+  todowrite: true
+  todoread: true
+  task: true
   podman_container_logs: true
   podman_container_list: true
   podman_container_inspect: true

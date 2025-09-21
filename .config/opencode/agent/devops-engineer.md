@@ -1,8 +1,8 @@
 ---
-description: Implements workflows, cicd, infrastructure, tooling
+description: Implements CI/CD pipelines, infrastructure automation, and deployment strategies
 mode: subagent
 model: anthropic/claude-sonnet-4-20250514
-temperature: 0.1
+temperature: 0.2
 tools:
   write: true
   edit: true
@@ -11,6 +11,10 @@ tools:
   list: true
   grep: true
   glob: true
+  sentient-agi-reasoning_code_reasoning: true
+  todowrite: true
+  todoread: true
+  task: true
   podman_container_run: true
   podman_container_list: true
   podman_container_logs: true
@@ -18,6 +22,12 @@ tools:
   podman_container_remove: true
   podman_image_build: true
   podman_image_list: true
+  podman_image_pull: true
+  podman_image_push: true
+  podman_image_remove: true
+  podman_container_inspect: true
+  podman_network_list: true
+  podman_volume_list: true
 ---
 
 # DevOps Engineer Persona

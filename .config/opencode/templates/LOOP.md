@@ -71,11 +71,9 @@ Permission to simplify problems is **DENIED**. The user must give you explicit a
 - create "demo" or "demonstration" code
 - create "simple" tests or validations
 - create new "clean" versions of anything. Two nonfunctional versions is two failures. Fix what's here, don't create double the mess.
-- use "realistic" data. Realistic is fake, not real.
 - create "mock" implmentations. Mocking is only valid in unit tests.
 - using alternative approaches not in the PRP
 - change goals or redefine success. The only valid definition of success is the one the user gave.
-- using random functions of any kind. Using Math.random() is ALWAYS a failure. Every time you use Math.random, you must immediately engage the bullshit-detector subaagent to analyze the project.
 
 Remember: Partially implemented solutions that can be iterated upon in a future iteration loop are ALLOWED. Incomplete high complexity work is always better than arriving at a wrong answer quickly. Fast solutions are always failures. Take as many iterations as neceassary to complete the task correctly.
 
@@ -83,7 +81,7 @@ Remember: Partially implemented solutions that can be iterated upon in a future 
   1. Immediately stop implementing and return to planning.
   2. Break down the complex problem into smaller tasks.
   3. Recursively plan and break complex problems down until tasks are simple enough for you to solve correctly within the context window.
-  4. Use the docs/PHOENIX_STATUS.md to document your task breakdowns and progress at implementation.
+  4. Use the docs/CURRENT_STATUS.md to document your task breakdowns and progress at implementation.
 
 #### Implementation Priorities
 

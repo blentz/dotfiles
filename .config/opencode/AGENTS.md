@@ -78,3 +78,74 @@ Before any response:
 - Comfortable with technical discussions and constructive feedback
 - Looking for genuine technical dialogue, not validation
 - Already fed up with the AI-generated slop and your sycophantic, over-optimistic bullshit.
+
+## Available Custom Tools
+
+When working with code and systems, use these specialized tools instead of generic bash commands:
+
+### Development Tools
+- **git**: Use for all git operations (status, diff, log, add, commit). Has built-in safety against command injection.
+- **sed**: Use for text substitution and stream editing. Supports dry-run mode to preview changes.
+- **awk**: Use for text processing, pattern matching, and field extraction from structured text.
+
+### Data Processing Tools
+- **jq**: Use for querying and transforming JSON data. More powerful than grep/sed for JSON.
+- **yq**: Use for YAML processing. Similar to jq but for YAML files.
+
+### Infrastructure Tools
+- **kubectl**: Use for all Kubernetes operations. Has namespace isolation and command validation.
+- **terraform**: Use for infrastructure as code operations. Supports plan/apply/destroy with state protection.
+- **helm**: Use for Kubernetes package management. Handles chart installations and upgrades.
+
+### Tool Usage Guidelines
+- Always prefer these custom tools over raw bash commands when applicable
+- The tools have built-in safety features like input sanitization and path validation
+- They provide better error handling and logging than raw shell commands
+- Use them to avoid common security pitfalls like command injection
+
+## Available Subagents
+
+Use the Task tool to delegate specialized work to these subagents:
+
+### When to Use Subagents
+- **For complex searches**: Use `general` agent when you need to search for something and aren't confident you'll find it in the first few tries
+- **For code review**: Automatically use `code-review-orchestrator` after implementing significant features
+- **For security concerns**: Use `security-scanner` when dealing with auth, secrets, or user input
+- **For bug fixes**: Use `maintenance-support` for complex debugging scenarios
+- **For testing**: Use `qa-engineer` for comprehensive test coverage
+- **For requirements**: Use `requirements-analyst` when specs are unclear
+
+### Core Development Agents
+- `general`: Multi-step research and complex searches
+- `developer`: Clean code implementation
+- `maintenance-support`: Bug fixes and troubleshooting
+- `qa-engineer`: Testing and quality assurance
+- `devops-engineer`: CI/CD and infrastructure automation
+
+### Analysis & Quality Agents
+- `system-architect`: System design decisions
+- `requirements-analyst`: Requirements gathering
+- `security-scanner`: Vulnerability detection
+- `code-review-orchestrator`: Code review coordination
+- `bullshit-detector`: Detection of fabricated results or bad code
+
+### Advanced Agents
+- `task-decomposition`: Breaking down complex tasks
+- `hypothesis-testing`: Testing multiple solution approaches
+- `performance-detector`: Performance optimization
+- `semantic-diff-analyzer`: Understanding code change impacts
+
+### How to Invoke Subagents
+```javascript
+task({
+  description: "Short description",
+  prompt: "Detailed instructions with context",
+  subagent_type: "agent-name"
+})
+```
+
+### Subagent Best Practices
+- Batch multiple subagent calls when possible for parallel execution
+- Provide detailed context in prompts
+- Trust but verify subagent outputs
+- Use specialized agents over general ones when applicable

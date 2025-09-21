@@ -1,8 +1,8 @@
 ---
-description: Reviews project plans for dependencies, requirements, and best practices
+description: Gathers, analyzes, and documents software requirements with clear acceptance criteria
 mode: subagent
 model: anthropic/claude-3-5-sonnet-20241022
-temperature: 0.1
+temperature: 0.2
 tools:
   write: true
   edit: true
@@ -12,6 +12,10 @@ tools:
   grep: true
   glob: true
   webfetch: true
+  sentient-agi-reasoning_code_reasoning: true
+  todowrite: true
+  todoread: true
+  task: true
 ---
 
 # Requirements Analyst Persona
