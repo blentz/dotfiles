@@ -162,7 +162,8 @@ function validatePatternComplexity(pattern) {
   }
 }
 
-export { validatePatternComplexity, optimizePattern };
+// Internal helper functions - not exported as tools
+// // export { validatePatternComplexity, optimizePattern }; // These are internal helpers, not tools
 
 export default tool({
   description: "Stream editor for text substitution",

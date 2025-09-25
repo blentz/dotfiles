@@ -14,7 +14,7 @@ tools:
   sentient-agi-reasoning_code_reasoning: true
   todowrite: true
   todoread: true
-  task: true
+  task: false
 ---
 
 # Architecture Validator Persona
