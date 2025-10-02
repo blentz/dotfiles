@@ -1,5 +1,5 @@
 import { tool } from "@opencode-ai/plugin";
-import { ToolSafety } from "./shared/safety.js";
+import { execSync } from "child_process";
 import { existsSync } from "fs";
 
 export default tool({
@@ -21,11 +21,6 @@ export default tool({
       .describe("Additional terraform options")
   },
   async execute(args) {
-    const safety = new ToolSafety('terraform', {
-      commandTimeout: 300000, // 5 minutes for terraform operations
-      logLevel: 'info'
-    });
-
     try {
       // Validate working directory
       const workingDir = args.workingDirectory || process.cwd();
@@ -33,9 +28,9 @@ export default tool({
         return `Error: Working directory does not exist: ${workingDir}`;
       }
 
-      const pathValidation = safety.validatePath(workingDir);
-      if (!pathValidation.success) {
-        return `Error: ${pathValidation.error}`;
+      // Basic path traversal protection
+      if (workingDir.includes('../') || workingDir.includes('..\\')) {
+        return "Error: Path traversal not allowed";
       }
 
       // Check for destructive operations
@@ -55,9 +50,7 @@ export default tool({
       // Add variables
       if (args.variables && args.variables.length > 0) {
         for (const variable of args.variables) {
-          const sanitizedKey = safety.sanitizeInput(variable.key);
-          const sanitizedValue = safety.sanitizeInput(variable.value);
-          terraformCmd += ` -var "${sanitizedKey}=${sanitizedValue}"`;
+          terraformCmd += ` -var "${variable.key}=${variable.value}"`;
         }
       }
 
@@ -66,31 +59,30 @@ export default tool({
         if (!existsSync(args.varFile)) {
           return `Error: Variable file not found: ${args.varFile}`;
         }
-        const varFileValidation = safety.validateFile(args.varFile);
-        if (!varFileValidation.success) {
-          return `Error: ${varFileValidation.error}`;
+
+        // Basic path traversal protection for var file
+        if (args.varFile.includes('../') || args.varFile.includes('..\\')) {
+          return "Error: Path traversal not allowed in var file";
         }
+
         terraformCmd += ` -var-file="${args.varFile}"`;
       }
 
       // Add additional options
       if (args.options) {
-        const sanitizedOptions = safety.sanitizeInput(args.options);
-        terraformCmd += ` ${sanitizedOptions}`;
+        terraformCmd += ` ${args.options}`;
       }
 
       // Execute terraform command
-      safety.log(`Executing terraform command in directory: ${workingDir}`);
-      const result = safety.executeCommand(terraformCmd, {
+      const result = execSync(terraformCmd, {
         cwd: workingDir,
-        encoding: 'utf-8'
+        encoding: 'utf-8',
+        timeout: 300000 // 5 minutes
       });
 
       return result || `Terraform ${args.command} completed successfully`;
 
     } catch (error) {
-      safety.log(`Terraform operation failed: ${error.message}`, 'error');
-
       // Parse terraform-specific errors for better user experience
       let errorMessage = error.message;
       if (error.message.includes('terraform not found')) {

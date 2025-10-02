@@ -1,13 +1,8 @@
 import { tool } from "@opencode-ai/plugin";
-import { ToolSafety } from "./shared/safety.js";
-import { writeFileSync, unlinkSync } from "fs";
+import { execSync } from "child_process";
+import { writeFileSync, unlinkSync, existsSync } from "fs";
 import { tmpdir } from "os";
 import { join } from "path";
-
-const safety = new ToolSafety("awk-tool", {
-  maxFileSize: 5 * 1024 * 1024, // 5MB limit
-  commandTimeout: 10000 // 10s timeout
-});
 
 export default tool({
   description: "Execute AWK programs on input text or files",
@@ -22,22 +17,20 @@ export default tool({
 
   async execute(args) {
     try {
-      // Validate input if it's a file
-      if (args.isFile) {
-        const validation = safety.validateFile(args.input);
-        if (!validation.success) {
-          return validation.error;
-        }
+      // Basic file existence check if input is a file
+      if (args.isFile && !existsSync(args.input)) {
+        return `Error: File not found: ${args.input}`;
+      }
+
+      // Basic path traversal protection
+      if (args.isFile && (args.input.includes('../') || args.input.includes('..\\'))) {
+        return "Error: Path traversal not allowed";
       }
 
       // Create temporary file for non-file input
       let inputFile = args.isFile ? args.input : join(tmpdir(), `awk-input-${Date.now()}.txt`);
       if (!args.isFile) {
-        try {
-          writeFileSync(inputFile, args.input);
-        } catch (error) {
-          return `Error creating temporary file: ${error.message}`;
-        }
+        writeFileSync(inputFile, args.input);
       }
 
       // Build AWK command
@@ -45,46 +38,37 @@ export default tool({
 
       // Add field separator if specified
       if (args.fieldSeparator) {
-        cmd.push(`-F"${safety.sanitizeInput(args.fieldSeparator)}"`);
+        cmd.push(`-F"${args.fieldSeparator}"`);
       }
 
       // Add variables if specified
       if (args.variables && typeof args.variables === 'object') {
         Object.entries(args.variables).forEach(([key, value]) => {
-          const safeKey = safety.sanitizeInput(key);
-          const safeValue = safety.sanitizeInput(String(value));
-          cmd.push(`-v ${safeKey}="${safeValue}"`);
+          cmd.push(`-v ${key}="${String(value)}"`);
         });
       }
 
       // Add output format if specified
       if (args.outputFormat) {
-        const safeFormat = safety.sanitizeInput(args.outputFormat);
-        cmd.push(`-v OFS="${safeFormat}"`);
+        cmd.push(`-v OFS="${args.outputFormat}"`);
       }
 
-      // Sanitize AWK program while preserving necessary syntax
-      const sanitizeAwkProgram = (program) => {
-        // Escape single quotes and backslashes
-        let sanitized = program.replace(/['\\]/g, '\\$&');
-        // Remove other dangerous shell characters but preserve {} and $
-        sanitized = sanitized.replace(/[;&|`()[\]<>"]/g, '');
-        return sanitized;
-      };
-
       // Add program and input file
-      cmd.push(`'${sanitizeAwkProgram(args.program)}'`);
+      cmd.push(`'${args.program}'`);
       cmd.push(`"${inputFile}"`);
 
-      // Execute command with safety wrapper
-      const result = safety.executeCommand(cmd.join(" "));
+      // Execute command
+      const result = execSync(cmd.join(" "), {
+        encoding: 'utf-8',
+        timeout: 30000
+      });
 
       // Cleanup temporary file
       if (!args.isFile) {
         try {
           unlinkSync(inputFile);
         } catch (error) {
-          safety.log(`Warning: Failed to cleanup temporary file: ${error.message}`, 'warn');
+          // Cleanup failure is not critical
         }
       }
 

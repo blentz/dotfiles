@@ -1,5 +1,6 @@
 import { tool } from "@opencode-ai/plugin";
-import { ToolSafety } from "./shared/safety.js";
+import { execSync } from "child_process";
+import { existsSync } from "fs";
 
 const PROTECTED_NAMESPACES = ['kube-system', 'kube-public', 'kube-node-lease'];
 
@@ -24,11 +25,6 @@ export default tool({
       .describe("Additional kubectl options")
   },
   async execute(args) {
-    const safety = new ToolSafety('kubectl', {
-      commandTimeout: 60000, // 60s for kubectl operations
-      logLevel: 'info'
-    });
-
     try {
       // Validate operation requirements
       if (['get', 'describe', 'delete'].includes(args.operation) && !args.resourceType) {
@@ -43,11 +39,15 @@ export default tool({
         return `Error: logs operation requires resourceName parameter`;
       }
 
-      // Validate file for apply operations
+      // Basic file existence check for apply operations
       if (args.file) {
-        const fileValidation = safety.validateFile(args.file);
-        if (!fileValidation.success) {
-          return `File validation failed: ${fileValidation.error}`;
+        if (!existsSync(args.file)) {
+          return `Error: File not found: ${args.file}`;
+        }
+
+        // Basic path traversal protection
+        if (args.file.includes('../') || args.file.includes('..\\')) {
+          return "Error: Path traversal not allowed";
         }
       }
 
@@ -63,7 +63,7 @@ export default tool({
 
       // Add namespace if specified
       if (args.namespace) {
-        kubectlCmd += ` -n ${safety.sanitizeInput(args.namespace)}`;
+        kubectlCmd += ` -n ${args.namespace}`;
       }
 
       // Add operation
@@ -73,9 +73,9 @@ export default tool({
       switch (args.operation) {
         case 'get':
         case 'describe':
-          kubectlCmd += ` ${safety.sanitizeInput(args.resourceType)}`;
+          kubectlCmd += ` ${args.resourceType}`;
           if (args.resourceName) {
-            kubectlCmd += ` ${safety.sanitizeInput(args.resourceName)}`;
+            kubectlCmd += ` ${args.resourceName}`;
           }
           break;
 
@@ -84,16 +84,15 @@ export default tool({
           const shouldDryRun = args.dryRun !== false;
           if (shouldDryRun) {
             kubectlCmd += ` --dry-run=client`;
-            safety.log('Dry-run enabled for delete operation', 'info');
           }
-          kubectlCmd += ` ${safety.sanitizeInput(args.resourceType)}`;
+          kubectlCmd += ` ${args.resourceType}`;
           if (args.resourceName) {
-            kubectlCmd += ` ${safety.sanitizeInput(args.resourceName)}`;
+            kubectlCmd += ` ${args.resourceName}`;
           }
           break;
 
         case 'apply':
-          kubectlCmd += ` -f ${safety.sanitizeInput(args.file)}`;
+          kubectlCmd += ` -f ${args.file}`;
           if (args.dryRun === true) {
             kubectlCmd += ` --dry-run=client`;
           }
@@ -101,9 +100,9 @@ export default tool({
 
         case 'logs':
           if (args.resourceType) {
-            kubectlCmd += ` ${safety.sanitizeInput(args.resourceType)}/${safety.sanitizeInput(args.resourceName)}`;
+            kubectlCmd += ` ${args.resourceType}/${args.resourceName}`;
           } else {
-            kubectlCmd += ` ${safety.sanitizeInput(args.resourceName)}`;
+            kubectlCmd += ` ${args.resourceName}`;
           }
           break;
       }
@@ -119,15 +118,18 @@ export default tool({
 
       // Add additional options
       if (args.options) {
-        kubectlCmd += ` ${safety.sanitizeInput(args.options)}`;
+        kubectlCmd += ` ${args.options}`;
       }
 
       // Execute command
-      const result = safety.executeCommand(kubectlCmd);
+      const result = execSync(kubectlCmd, {
+        encoding: 'utf-8',
+        timeout: 60000
+      });
+
       return result.trim() || `kubectl ${args.operation} completed successfully`;
 
     } catch (error) {
-      safety.log(`kubectl operation failed: ${error.message}`, 'error');
       return `kubectl error: ${error.message}`;
     }
   }

@@ -1,5 +1,6 @@
 import { tool } from "@opencode-ai/plugin";
-import { ToolSafety } from "./shared/safety.js";
+import { execSync } from "child_process";
+import { existsSync } from "fs";
 
 export default tool({
   description: "Query and manipulate YAML/JSON/XML files using yq",
@@ -16,11 +17,6 @@ export default tool({
     inPlace: tool.schema.boolean().optional().describe("Edit file in place (only valid with file input)")
   },
   async execute(args) {
-    const safety = new ToolSafety('yq', {
-      maxFileSize: 50 * 1024 * 1024, // 50MB for large YAML/JSON files
-      commandTimeout: 60000 // 60s for complex queries
-    });
-
     try {
       // Validate input requirements
       if (!args.file && !args.input) {
@@ -36,20 +32,17 @@ export default tool({
       }
 
       let yqCmd = 'yq';
-      let inputData = null;
 
       // Handle file input
       if (args.file) {
-        // Validate file using ToolSafety
-        const fileValidation = safety.validateFile(args.file);
-        if (!fileValidation.success) {
-          return fileValidation.error;
+        // Basic file existence check
+        if (!existsSync(args.file)) {
+          return `Error: File not found: ${args.file}`;
         }
 
-        // Validate path to prevent directory traversal
-        const pathValidation = safety.validatePath(args.file);
-        if (!pathValidation.success) {
-          return pathValidation.error;
+        // Basic path traversal protection
+        if (args.file.includes('../') || args.file.includes('..\\')) {
+          return "Error: Path traversal not allowed";
         }
 
         // Add in-place flag if requested
@@ -68,11 +61,9 @@ export default tool({
         }
 
         // Add query and file
-        yqCmd += ` '${safety.sanitizeInput(args.query)}' "${pathValidation.resolvedPath}"`;
+        yqCmd += ` '${args.query}' "${args.file}"`;
       } else {
         // Handle string input
-        inputData = args.input;
-
         // Add input format if specified
         if (args.inputFormat && args.inputFormat !== 'auto') {
           yqCmd += ` -p ${args.inputFormat}`;
@@ -84,23 +75,23 @@ export default tool({
         }
 
         // Add query
-        yqCmd += ` '${safety.sanitizeInput(args.query)}'`;
+        yqCmd += ` '${args.query}'`;
       }
 
       // Execute yq command
-      const result = safety.executeCommand(yqCmd, {
-        input: inputData,
-        encoding: 'utf-8'
+      const result = execSync(yqCmd, {
+        input: args.input || undefined,
+        encoding: 'utf-8',
+        timeout: 30000
       });
 
       // For in-place operations, return success message
       if (args.inPlace) {
-        return `Successfully updated ${args.file} in place (backup created as ${args.file}.bak)`;
+        return `Successfully updated ${args.file} in place`;
       }
 
       return result.trim();
     } catch (error) {
-      safety.log(`yq execution failed: ${error.message}`, 'error');
       return `Error: ${error.message}`;
     }
   }

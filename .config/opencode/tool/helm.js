@@ -1,10 +1,6 @@
 import { tool } from "@opencode-ai/plugin";
-import { ToolSafety } from "./shared/safety.js";
-
-const safety = new ToolSafety("helm", {
-  commandTimeout: 120000, // 2 minute timeout for helm operations
-  logLevel: 'info'
-});
+import { execSync } from "child_process";
+import { existsSync } from "fs";
 
 export default tool({
   description: "Helm chart management for Kubernetes",
@@ -71,11 +67,15 @@ export default tool({
       }
     }
 
-    // Validate values file if provided
+    // Basic file existence check for values file
     if (args.valuesFile) {
-      const validation = safety.validateFile(args.valuesFile);
-      if (!validation.success) {
-        return validation.error;
+      if (!existsSync(args.valuesFile)) {
+        return `Error: Values file not found: ${args.valuesFile}`;
+      }
+
+      // Basic path traversal protection
+      if (args.valuesFile.includes('../') || args.valuesFile.includes('..\\')) {
+        return "Error: Path traversal not allowed in values file";
       }
     }
 
@@ -84,16 +84,16 @@ export default tool({
 
     // Add release name
     if (args.releaseName) {
-      command += ` ${safety.sanitizeInput(args.releaseName)}`;
+      command += ` ${args.releaseName}`;
     }
 
     // Add chart for install/upgrade
     if (args.chart && ['install', 'upgrade'].includes(args.operation)) {
-      command += ` ${safety.sanitizeInput(args.chart)}`;
+      command += ` ${args.chart}`;
     }
 
     // Add namespace
-    command += ` -n ${safety.sanitizeInput(args.namespace)}`;
+    command += ` -n ${args.namespace}`;
 
     // Add atomic flag for install/upgrade
     if (args.atomic && ['install', 'upgrade'].includes(args.operation)) {
@@ -107,7 +107,7 @@ export default tool({
 
     // Add timeout if specified
     if (args.timeout) {
-      command += ` --timeout ${safety.sanitizeInput(args.timeout)}`;
+      command += ` --timeout ${args.timeout}`;
     }
 
     // Add create namespace flag
@@ -117,7 +117,7 @@ export default tool({
 
     // Add values file
     if (args.valuesFile) {
-      command += ` -f ${safety.sanitizeInput(args.valuesFile)}`;
+      command += ` -f ${args.valuesFile}`;
     }
 
     // Add set values
@@ -127,23 +127,25 @@ export default tool({
         if (!setValue.includes('=')) {
           return `Error: Invalid set value format: ${setValue}. Use key=value format.`;
         }
-        command += ` --set ${safety.sanitizeInput(setValue)}`;
+        command += ` --set ${setValue}`;
       }
     }
 
     // Add version if specified
     if (args.version) {
-      command += ` --version ${safety.sanitizeInput(args.version)}`;
+      command += ` --version ${args.version}`;
     }
 
     // Add additional flags
     if (args.additionalFlags) {
-      command += ` ${safety.sanitizeInput(args.additionalFlags)}`;
+      command += ` ${args.additionalFlags}`;
     }
 
     try {
-      safety.log(`Executing helm command: ${args.operation} for ${args.releaseName || 'cluster'}`);
-      const result = safety.executeCommand(command);
+      const result = execSync(command, {
+        encoding: 'utf-8',
+        timeout: 120000 // 2 minutes
+      });
       return result || `Helm ${args.operation} completed successfully`;
     } catch (error) {
       return `Helm error: ${error.message}`;
