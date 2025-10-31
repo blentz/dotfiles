@@ -1,7 +1,7 @@
 ---
 description: Periodically reviews and consolidates working memory into long-term semantic memory, identifying patterns and creating knowledge graphs
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: anthropic/claude-sonnet-4-5
 temperature: 0.4
 tools:
   write: true

@@ -1,7 +1,7 @@
 ---
 description: Ensures operations are idempotent, preventing duplicate actions and maintaining consistency
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: openai/gpt-5
 temperature: 0.1
 tools:
   write: true

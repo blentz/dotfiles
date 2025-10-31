@@ -1,6 +1,6 @@
 ---
 agent: requirements-analyst
-allowed-tools: Bash(git:*)
+allowed-tools: Git, Bash(git:*)
 description: Understand the current state of the git repository
 ---
 

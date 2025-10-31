@@ -1,7 +1,7 @@
 ---
 description: Implements clean, efficient, and maintainable code following best practices
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: anthropic/claude-3-5-sonnet-20240620
 temperature: 0.2
 tools:
   write: true

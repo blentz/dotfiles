@@ -1,7 +1,7 @@
 ---
 description: Generates adversarial inputs and edge cases to stress-test implementations
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: openai/gpt-5
 temperature: 0.7
 tools:
   write: true

@@ -1,7 +1,9 @@
 ---
 description: Implements ReAct (Reasoning + Acting) pattern combining reasoning traces with task-specific actions in an interleaved manner
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: anthropic/claude-sonnet-4-5
+reasoningEffort: high
+textVerbosity: low
 temperature: 0.5
 tools:
   write: true

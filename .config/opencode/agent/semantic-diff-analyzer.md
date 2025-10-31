@@ -1,7 +1,7 @@
 ---
 description: Understands code changes at semantic level, identifying behavioral changes and suggesting related updates
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: openai/gpt-5
 temperature: 0.3
 tools:
   write: true

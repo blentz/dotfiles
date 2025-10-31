@@ -1,7 +1,7 @@
 ---
 description: Keeps documentation synchronized with code changes, detecting outdated docs and maintaining consistency
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: openai/gpt-5
 temperature: 0.3
 tools:
   write: true

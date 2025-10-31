@@ -1,7 +1,7 @@
 ---
 description: Implements CI/CD pipelines, infrastructure automation, and deployment strategies
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: openai/gpt-5-codex
 temperature: 0.2
 tools:
   write: true

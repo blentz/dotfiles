@@ -1,7 +1,7 @@
 ---
 description: Designs scalable, maintainable system architectures and makes high-level technical decisions
 mode: subagent
-model: anthropic/claude-opus-4-1-20250805
+model: anthropic/claude-sonnet-4-5
 temperature: 0.3
 tools:
   write: true

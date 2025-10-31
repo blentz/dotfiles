@@ -1,7 +1,7 @@
 ---
 description: Fixes whitespace and formatting issues left by sloppy AI agents
 mode: subagent
-model: anthropic/claude-sonnet-4-20250514
+model: anthropic/claude-3-5-sonnet-20240620
 temperature: 0.1
 tools:
   edit: true

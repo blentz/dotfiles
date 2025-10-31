@@ -1,7 +1,7 @@
 ---
 description: Meta-agent that coordinates multiple specialized reviewers and synthesizes feedback into actionable recommendations with conflict resolution
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: openai/gpt-5
 temperature: 0.3
 tools:
   write: true

@@ -1,7 +1,7 @@
 ---
 description: Routes tasks to multiple LLMs, compares outputs, identifies agreements and disagreements, synthesizes best solution
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: anthropic/claude-sonnet-4-5
 temperature: 0.3
 tools:
   write: true

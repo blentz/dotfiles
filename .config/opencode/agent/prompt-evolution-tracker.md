@@ -1,7 +1,7 @@
 ---
 description: Tracks prompt modifications, measures effectiveness, and suggests improvements based on outcomes
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: anthropic/claude-sonnet-4-5
 temperature: 0.5
 tools:
   write: true

@@ -1,7 +1,7 @@
 ---
 description: Gathers, analyzes, and documents software requirements with clear acceptance criteria
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: anthropic/claude-sonnet-4-5
 temperature: 0.2
 tools:
   write: true

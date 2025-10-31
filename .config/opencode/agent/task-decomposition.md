@@ -1,7 +1,7 @@
 ---
 description: Breaks down complex tasks into optimal subtasks, identifying dependencies and suggesting parallel execution strategies
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: anthropic/claude-sonnet-4-5
 temperature: 0.4
 tools:
   write: true

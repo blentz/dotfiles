@@ -1,7 +1,7 @@
 ---
 description: Fixes bugs, troubleshoots complex issues, resolves production outages
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: anthropic/claude-3-5-sonnet-20240620
 temperature: 0.1
 tools:
   write: true

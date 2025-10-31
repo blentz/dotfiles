@@ -1,7 +1,7 @@
 ---
 description: Reviews projects to detect fabricated results, misrepresentations of the truth, false data, over-simplified code, bad code smells, and AI generated slop
 mode: subagent
-model: anthropic/claude-opus-4-1-20250805
+model: openai/gpt-5
 temperature: 0.05
 tools:
   write: true

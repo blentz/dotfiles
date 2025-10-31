@@ -1,7 +1,9 @@
 ---
 description: Analyzes changes to determine version bumps and maintains changelogs automatically
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: openai/gpt-5
+reasoningEffort: high
+textVerbosity: low
 temperature: 0.2
 tools:
   write: true

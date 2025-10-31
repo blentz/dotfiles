@@ -1,7 +1,7 @@
 ---
 description: Learns from past errors, builds a knowledge base of error patterns, and proactively suggests preventive measures in similar contexts
 mode: subagent
-model: anthropic/claude-3-5-sonnet-20241022
+model: openai/gpt-5
 temperature: 0.2
 tools:
   write: true

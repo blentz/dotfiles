@@ -1,6 +1,6 @@
 ---
 agent: requirements-analyst
-allowed-tools: Bash, Read
+allowed-tools: Read
 description: Load context for a new agent session by analyzing codebase structure and README
 ---
 
