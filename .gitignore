@@ -1,6 +1,10 @@
 **/*.pyc
 **/*.sw[op]
 **/node_modules
+**/package.json
+**/bun.lock
+**/.opencode
+**/secrets/
 
 .config/gcloud
 .config/gh
@@ -13,3 +17,5 @@
 .config/karabiner
 .config/lsd
 .config/packer
+
+
