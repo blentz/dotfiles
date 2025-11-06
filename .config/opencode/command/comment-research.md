@@ -18,6 +18,7 @@ Add the contents of a research plan document as a comment to the specified Linea
    - Use the Linear tool to create a comment on ticket: $1
    - Post the complete contents of the research plan as the comment body
    - The comment should include all sections from the plan document
+   - The comment MUST NOT include duplication of the ticket description or title.
 
 ## Context
 

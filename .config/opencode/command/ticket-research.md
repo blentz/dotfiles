@@ -40,6 +40,12 @@ Research a Linear ticket comprehensively and document findings in a structured p
      - **Open Questions**: Items requiring clarification
      - **Next Steps**: Recommended actions
      - **References**: Links to all sources consulted
+   - NEVER include:
+     - time estimates
+     - cost estimates
+     - deadlines or due-dates
+     - past-tense or future-tense wording related to document revisions
+     - document revision information
 
 ## Context
 

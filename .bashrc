@@ -190,4 +190,48 @@ eval "${STARSHIP_COMPLETION}"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+mcp_toggle() {
+    local name="$1"
+    local raw="${2:-true}"
+    local cfg="${3:-$HOME/.config/opencode/opencode.json}"
+
+    if ! command -v jq >/dev/null 2>&1; then
+        echo "jq not found" >&2
+        return 1
+    fi
+
+    local state
+    case "$raw" in
+        true|false)
+            state="$raw"
+            ;;
+        enable|on|enabled)
+            state=true
+            ;;
+        disable|off|disabled)
+            state=false
+            ;;
+        *)
+            echo "usage: mcp_toggle  <true|false|enable|disable> [config_path]" >&2
+            return 2
+            ;;
+    esac
+
+    local tmp="${cfg}.tmp.$$"
+    mkdir -p "$(dirname \"$cfg\")"
+
+    if [ ! -f "$cfg" ]; then
+        printf '%s\n' '{ "mcp": {} }' >"$cfg"
+    fi
+
+    if jq --arg name "$name" --argjson state "$state"  '.mcp = (.mcp // {}) | .mcp[$name] = (.mcp[$name] // {}) | .mcp[$name].enabled = $state'  "$cfg" >"$tmp"; then
+        mv "$tmp" "$cfg"
+        echo "Set mcp.$name.enabled=$state in $cfg"
+    else
+        echo "Failed to update config" >&2
+        rm -f "$tmp"
+        return 3
+    fi
+}
+alias mcp_status="jq -r '.mcp | to_entries[] | \"\(.key)\t\t\(.value.enabled // false)\"' /Users/blentz/.config/opencode/opencode.json"
 # gcloud auth print-access-token | podman login -u oauth2accesstoken --password-stdin

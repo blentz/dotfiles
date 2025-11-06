@@ -4,7 +4,7 @@
   "small_model": "anthropic/claude-3-5-haiku-20241022",
   "keybinds": {
     "leader": "ctrl+x",
-    "app_exit": "<leader>q",
+    "app_exit": "ctrl+q,<leader>q",
     "editor_open": "<leader>e",
     "theme_list": "<leader>t",
     "session_export": "<leader>x",
@@ -14,8 +14,8 @@
     "session_unshare": "none",
     "session_interrupt": "esc",
     "session_compact": "<leader>c",
-    "session_child_cycle": "ctrl+right",
-    "session_child_cycle_reverse": "ctrl+left",
+    "session_child_cycle": "alt+right",
+    "session_child_cycle_reverse": "alt+left",
     "messages_page_up": "pgup",
     "messages_page_down": "pgdown",
     "messages_half_page_up": "ctrl+alt+u",
@@ -307,7 +307,7 @@
       "environment": {
         "VANTA_ENV_FILE": "/Users/blentz/.vanta"
       },
-      "enabled": true
+      "enabled": false
     }
   },
   "instructions": [
