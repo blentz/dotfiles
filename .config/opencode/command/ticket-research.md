@@ -1,6 +1,6 @@
 ---
 agent: requirements-analyst
-allowed-tools: Read, Write, WebFetch
+allowed-tools: Read, Write, WebFetch, sentient-agi-reasoning_code_reasoning
 description: "Research a Linear ticket and create a detailed analysis plan (usage\\: /ticket-research TICKET-123)"
 ---
 
@@ -46,12 +46,10 @@ Research a Linear ticket comprehensively and document findings in a structured p
      - **Open Questions**: Items requiring clarification
      - **Next Steps**: Recommended actions
      - **References**: Links to all sources consulted
-   - NEVER include:
-     - time estimates
-     - cost estimates
-     - deadlines or due-dates
-     - past-tense or future-tense wording related to document revisions
-     - document revision information
+   - NEVER INCLUDE:
+     - NO time estimates
+     - NO cost estimates
+     - NO ticket summary
 
 ## Context
 
