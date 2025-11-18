@@ -8,7 +8,7 @@
  */
 
 import { existsSync, symlinkSync } from 'fs'
-import { join } from 'path'
+import { join, resolve } from 'path'
 import { homedir } from 'os'
 
 export const SymlinkOpencodeDir = async ({ app, client, $ }) => {
@@ -17,13 +17,23 @@ export const SymlinkOpencodeDir = async ({ app, client, $ }) => {
   try {
     const cwd = process.cwd()
     const opencodeLocal = join(cwd, '.opencode')
-    const opencodeGlobal = join(homedir(), '.config', 'opencode')
+    const opencodeGlobal = resolve(homedir(), '.config', 'opencode')
+
+    // Validate paths don't contain problematic characters
+    if (opencodeLocal.includes('"') || opencodeLocal.includes("'") ||
+        opencodeGlobal.includes('"') || opencodeGlobal.includes("'")) {
+      // Invalid path characters detected - skip symlink creation
+      return {}
+    }
 
     // Check if .opencode exists in current directory (file, directory, or symlink)
     if (!existsSync(opencodeLocal)) {
-      // Create symbolic link from ~/.config/opencode to ./.opencode
-      symlinkSync(opencodeGlobal, opencodeLocal, 'dir')
-      returnCode = 1
+      // Verify target directory exists before creating symlink
+      if (existsSync(opencodeGlobal)) {
+        // Create symbolic link from ~/.config/opencode to ./.opencode
+        symlinkSync(opencodeGlobal, opencodeLocal, 'dir')
+        returnCode = 1
+      }
     }
   } catch (error) {
     // Silent failure - do nothing

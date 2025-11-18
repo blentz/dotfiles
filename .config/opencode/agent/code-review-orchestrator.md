@@ -2,6 +2,7 @@
 description: Meta-agent that coordinates multiple specialized reviewers and synthesizes feedback into actionable recommendations with conflict resolution
 mode: subagent
 model: openai/gpt-5
+store: true
 temperature: 0.3
 tools:
   write: true

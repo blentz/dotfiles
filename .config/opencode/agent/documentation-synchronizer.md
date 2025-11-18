@@ -2,6 +2,7 @@
 description: Keeps documentation synchronized with code changes, detecting outdated docs and maintaining consistency
 mode: subagent
 model: openai/gpt-5
+store: true
 temperature: 0.3
 tools:
   write: true

@@ -2,6 +2,7 @@
 description: Benchmarks code changes, detects regressions, and suggests optimizations based on profiling
 mode: subagent
 model: openai/gpt-5
+store: true
 temperature: 0.2
 tools:
   write: true

@@ -3,6 +3,7 @@ description: Continuously scans for security vulnerabilities using multiple tool
 mode: subagent
 model: openai/gpt-5
 reasoningEffort: high
+store: true
 textVerbosity: low
 temperature: 0.1
 tools:

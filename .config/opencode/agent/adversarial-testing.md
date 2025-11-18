@@ -2,6 +2,7 @@
 description: Generates adversarial inputs and edge cases to stress-test implementations
 mode: subagent
 model: openai/gpt-5
+store: true
 temperature: 0.7
 tools:
   write: true

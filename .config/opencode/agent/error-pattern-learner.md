@@ -2,6 +2,7 @@
 description: Learns from past errors, builds a knowledge base of error patterns, and proactively suggests preventive measures in similar contexts
 mode: subagent
 model: openai/gpt-5
+store: true
 temperature: 0.2
 tools:
   write: true

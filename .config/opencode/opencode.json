@@ -136,7 +136,7 @@
       "environment": {
         "INCIDENT_IO_API_KEY": "{file:~/.config/opencode/secrets/incident_io_key}"
       },
-      "enabled": false
+      "enabled": true
     },
     "slack": {
       "type": "local",
@@ -306,6 +306,19 @@
       ],
       "environment": {
         "VANTA_ENV_FILE": "/Users/blentz/.vanta"
+      },
+      "enabled": true
+    },
+    "mongodb-atlas": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "mongodb-mcp-server",
+        "--readOnly"
+      ],
+      "environment": {
+        "MDB_MCP_CONNECTION_STRING": "{file:~/.config/opencode/secrets/mongodb_atlas_connection_string}"
       },
       "enabled": false
     }

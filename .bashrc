@@ -72,7 +72,7 @@ alias podman-rm-exited='podman rm -v $(podman ps -qa --no-trunc --filter "status
 #                             muccg/devpi || podman start devpi'
 
 alias github-token="grep oauth_token /Users/brett.lentz/.config/gh/hosts.yml | awk '{print \$2}'"
-alias gpom="git branch --list master main develop | tr -d '*' | xargs -n 1 git pull origin"
+alias gpom="git branch --list master main develop devel dev | tr -d '*' | xargs -n 1 git pull origin"
 
 function set_kube_namespace() {
     kubectl config set-context --current --namespace="$1"
@@ -150,7 +150,7 @@ mcp_toggle() {
     esac
 
     local tmp="${cfg}.tmp.$$"
-    mkdir -p "$(dirname \"$cfg\")"
+    mkdir -p "$(dirname "$cfg")"
 
     if [ ! -f "$cfg" ]; then
         printf '%s\n' '{ "mcp": {} }' >"$cfg"
@@ -218,7 +218,7 @@ mcp_toggle() {
     esac
 
     local tmp="${cfg}.tmp.$$"
-    mkdir -p "$(dirname \"$cfg\")"
+    mkdir -p "$(dirname "$cfg")"
 
     if [ ! -f "$cfg" ]; then
         printf '%s\n' '{ "mcp": {} }' >"$cfg"

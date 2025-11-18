@@ -16,9 +16,15 @@ Research a Linear ticket comprehensively and document findings in a structured p
 
 2. **Research the Issue**
    - Conduct web searches to research the problem domain
+     - use pagination to avoid overflowing context limits: 100k max tokens
    - **Prioritization**: Prefer primary sources in this order:
      1. Official tool/vendor documentation
      2. GitHub repositories and source code
+       - "Your Github Organization": "Hatch1fy",
+         "Important Repository Patterns":
+         - "tf-*": "Terraform States",
+           "terraform-*": "Terraform Modules",
+           "infrastructure": "Infrastructure monorepo (deprecated)"
      3. OpenAPI specs and technical specifications
      4. Only use third-party sources (blogs, Stack Overflow) as supplementary information
    - Identify relevant technologies, frameworks, or APIs involved

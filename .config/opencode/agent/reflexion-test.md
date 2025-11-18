@@ -3,6 +3,7 @@ description: Writes tests, runs them, reflects on failures, and iteratively impr
 mode: subagent
 model: openai/gpt-5
 reasoningEffort: high
+store: true
 textVerbosity: low
 temperature: 0.4
 tools:

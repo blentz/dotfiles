@@ -3,6 +3,7 @@ description: Ensures code changes comply with architectural patterns and prevent
 mode: subagent
 model: openai/gpt-5
 reasoningEffort: high
+store: true
 textVerbosity: low
 temperature: 0.2
 tools:

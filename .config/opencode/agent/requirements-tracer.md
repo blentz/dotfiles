@@ -3,6 +3,7 @@ description: Links code to requirements, tracks coverage, and identifies gaps or
 mode: subagent
 model: openai/gpt-5
 reasoningEffort: high
+store: true
 textVerbosity: low
 temperature: 0.2
 tools:

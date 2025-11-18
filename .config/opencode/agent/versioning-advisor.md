@@ -3,6 +3,7 @@ description: Analyzes changes to determine version bumps and maintains changelog
 mode: subagent
 model: openai/gpt-5
 reasoningEffort: high
+store: true
 textVerbosity: low
 temperature: 0.2
 tools:
