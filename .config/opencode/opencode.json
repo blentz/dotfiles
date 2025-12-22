@@ -37,6 +37,31 @@
     "input_newline": "shift+return,ctrl+j"
   },
   "provider": {
+    "openai": {
+      "models": {
+        "openai/gpt-5": {
+          "store": true
+        },
+        "openai/gpt-5-mini": {
+          "store": true
+        },
+        "openai/gpt-5-turbo": {
+          "store": true
+        },
+        "openai/gpt-5-vision": {
+          "store": true
+        },
+        "openai/gpt-5-codex": {
+          "store": true
+        },
+        "openai/gpt-5-codex-mini": {
+          "store": true
+        },
+        "openai/gpt-5-codex-turbo": {
+          "store": true
+        }
+      }
+    },
     "ollama": {
       "npm": "@ai-sdk/openai-compatible",
       "options": {
@@ -307,7 +332,7 @@
       "environment": {
         "VANTA_ENV_FILE": "/Users/blentz/.vanta"
       },
-      "enabled": true
+      "enabled": false
     },
     "mongodb-atlas": {
       "type": "local",
@@ -321,6 +346,17 @@
         "MDB_MCP_CONNECTION_STRING": "{file:~/.config/opencode/secrets/mongodb_atlas_connection_string}"
       },
       "enabled": false
+    },
+    "crawl4ai": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "mcp-remote",
+        "http://localhost:11235/mcp/sse"
+      ],
+      "environment": {},
+      "enabled": true
     }
   },
   "instructions": [
