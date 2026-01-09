@@ -5,6 +5,7 @@
 **/bun.lock
 **/.opencode
 **/secrets/
+**/*_cache.json
 
 .config/gcloud
 .config/gh
@@ -17,5 +18,4 @@
 .config/karabiner
 .config/lsd
 .config/packer
-
 
