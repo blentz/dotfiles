@@ -1,7 +1,7 @@
 ---
 description: Continuously scans for security vulnerabilities using multiple tools and databases, providing real-time alerts and remediation
 mode: subagent
-model: openai/gpt-5
+model: openai/gpt-5.2
 reasoningEffort: high
 store: true
 textVerbosity: low

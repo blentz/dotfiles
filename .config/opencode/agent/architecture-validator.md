@@ -1,7 +1,7 @@
 ---
 description: Ensures code changes comply with architectural patterns and prevents architectural drift
 mode: subagent
-model: openai/gpt-5
+model: openai/gpt-5.2
 reasoningEffort: high
 store: true
 textVerbosity: low

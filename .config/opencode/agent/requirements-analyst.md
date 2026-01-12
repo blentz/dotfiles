@@ -1,7 +1,7 @@
 ---
 description: Gathers, analyzes, and documents software requirements with clear acceptance criteria
 mode: subagent
-model: anthropic/claude-sonnet-4-5
+model: openai/gpt-5.2
 temperature: 0.2
 tools:
   write: true

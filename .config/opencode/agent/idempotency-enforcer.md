@@ -1,7 +1,7 @@
 ---
 description: Ensures operations are idempotent, preventing duplicate actions and maintaining consistency
 mode: subagent
-model: openai/gpt-5
+model: openai/gpt-5.2
 store: true
 temperature: 0.1
 tools:

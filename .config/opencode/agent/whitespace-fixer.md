@@ -1,7 +1,7 @@
 ---
 description: Fixes whitespace and formatting issues left by sloppy AI agents
 mode: subagent
-model: anthropic/claude-3-7-sonnet-latest
+model: openai/gpt-5.2
 temperature: 0.1
 tools:
   edit: true

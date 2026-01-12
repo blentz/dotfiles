@@ -1,7 +1,7 @@
 ---
 description: Implements clean, efficient, and maintainable code following best practices
 mode: subagent
-model: anthropic/claude-3-7-sonnet-latest
+model: openai/gpt-5.2
 temperature: 0.2
 tools:
   write: true

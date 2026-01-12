@@ -1,7 +1,7 @@
 ---
 description: Understands code changes at semantic level, identifying behavioral changes and suggesting related updates
 mode: subagent
-model: openai/gpt-5
+model: openai/gpt-5.2
 store: true
 temperature: 0.3
 tools:

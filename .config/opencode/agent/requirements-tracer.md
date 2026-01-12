@@ -1,7 +1,7 @@
 ---
 description: Links code to requirements, tracks coverage, and identifies gaps or deviations from specifications
 mode: subagent
-model: openai/gpt-5
+model: openai/gpt-5.2
 reasoningEffort: high
 store: true
 textVerbosity: low

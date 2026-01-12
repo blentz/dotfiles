@@ -1,7 +1,7 @@
 ---
 description: Writes tests, runs them, reflects on failures, and iteratively improves both tests and implementation through self-reflection loops
 mode: subagent
-model: openai/gpt-5
+model: openai/gpt-5.2
 reasoningEffort: high
 store: true
 textVerbosity: low

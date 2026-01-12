@@ -1,7 +1,7 @@
 ---
 description: Designs scalable, maintainable system architectures and makes high-level technical decisions
 mode: subagent
-model: anthropic/claude-sonnet-4-5
+model: openai/gpt-5.2
 temperature: 0.3
 tools:
   write: true

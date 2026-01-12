@@ -1,7 +1,7 @@
 ---
 description: Fixes bugs, troubleshoots complex issues, resolves production outages
 mode: subagent
-model: anthropic/claude-3-7-sonnet-latest
+model: openai/gpt-5.2
 temperature: 0.1
 tools:
   write: true

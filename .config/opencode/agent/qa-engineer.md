@@ -1,7 +1,7 @@
 ---
 description: Comprehensive testing and quality assurance for software projects
 mode: subagent
-model: openai/gpt-5
+model: openai/gpt-5.2
 store: true
 temperature: 0.2
 tools:

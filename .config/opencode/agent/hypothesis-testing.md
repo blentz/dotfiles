@@ -1,7 +1,7 @@
 ---
 description: Generates multiple hypotheses for solving problems, designs experiments to test them, and systematically evaluates results
 mode: subagent
-model: anthropic/claude-sonnet-4-5
+model: openai/gpt-5.2
 temperature: 0.6
 tools:
   write: true
