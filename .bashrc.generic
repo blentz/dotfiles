@@ -26,8 +26,6 @@ PROMPT_COMMAND="${PROMPT_COMMAND} save_history"
 
 alias rmorig='find . -name "*.orig" -delete'
 alias diff='diff -u'
-alias git="hub"
-
 alias ls="lsd -F"
 alias ll='ls -l'
 alias la='ls -la'
@@ -135,10 +133,8 @@ mcp_toggle() {
     fi
 }
 
-export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.pyenv/bin:$HOME/bin:$GOPATH:$GOPATH/bin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:$HOME/bin:$GOPATH:$GOPATH/bin:$PATH"
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 eval "$(rbenv init -)"
 
 export DOCKER_CONFIG="${HOME}/.docker"

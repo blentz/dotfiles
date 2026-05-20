@@ -26,7 +26,14 @@ export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
 export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
 
 # Put Homebrew bins ahead of everything generic set.
-export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/opt/postgresql@15/bin:$PATH"
+export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/opt/postgresql@15/bin:$HOME/.pyenv/bin:$PATH"
+
+# pyenv (macOS only).
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# hub is installed via Homebrew.
+alias git="hub"
 
 alias mvim="open -a MacVim.app $1"
 alias sort-launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
