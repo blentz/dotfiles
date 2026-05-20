@@ -1,0 +1,35 @@
+# .bashrc.darwin -- macOS-specific config (Homebrew lives here only)
+
+# Silence the macOS "bash is deprecated, use zsh" warning.
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# Apple Silicon Homebrew prefix.
+export HOMEBREW_PREFIX="/opt/homebrew"
+
+# Homebrew bash completions.
+if type brew &>/dev/null; then
+    HOMEBREW_PREFIX="$(brew --prefix)"
+    source_file "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+    for COMPLETION in $(\ls -1 ${HOMEBREW_PREFIX}/etc/bash_completion.d | \grep -E '\.(ba)?sh'); do
+        source_file "$COMPLETION"
+    done
+fi
+
+# install fzf completions if needed
+[ -f ${HOMEBREW_PREFIX}/opt/fzf/install ] && [ ! -f $HOME/.fzf.bash ] && ${HOMEBREW_PREFIX}/opt/fzf/install
+
+# BSD ls colors (consumed by macOS ls / lsd).
+export LSCOLORS='GxfxcxdxcxegedaBagabad'
+
+# Intel-Homebrew build flags for compiling Python/etc against keg-only libs.
+export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib"
+export CPPFLAGS="-I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
+
+# Put Homebrew bins ahead of everything generic set.
+export PATH="${HOMEBREW_PREFIX}/bin:${HOMEBREW_PREFIX}/opt/postgresql@15/bin:$PATH"
+
+alias mvim="open -a MacVim.app $1"
+alias sort-launchpad="defaults write com.apple.dock ResetLaunchPad -bool true; killall Dock"
+
+alias github-token="grep oauth_token /Users/brett.lentz/.config/gh/hosts.yml | awk '{print \$2}'"
+alias mcp_status="jq -r '.mcp | to_entries[] | \"\(.key)\t\t\(.value.enabled // false)\"' /Users/blentz/.config/opencode/opencode.json"
